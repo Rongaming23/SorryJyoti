@@ -141,6 +141,11 @@ Login
 <option>Instruction</option>
 </select>
 
+<select id="refund">
+<option>Source Payment</option>
+<option>Wallet</option>
+</select>  
+  
 <select id="partner">
 <option>Swiggy</option>
 <option>Zomato</option>
@@ -184,6 +189,7 @@ Login
 <th>Name</th>
 <th>Order</th>
 <th>Issue</th>
+<th>Refund</th>
 <th>Partner</th>
 <th>Agent</th>
 <th>Created By</th>
@@ -286,6 +292,7 @@ date:get("date"),
 outlet:get("outlet"),
 concern:get("concern"),
 issue:get("issue"),
+refund:get("refund"),
 partner:get("partner"),
 agent:get("agent"),
 createdBy: auth.currentUser ? auth.currentUser.email : "unknown",
@@ -309,6 +316,7 @@ Order: ${data.order}
 Date: ${data.date}
 Outlet: ${data.outlet}
 Issue: ${data.issue} : Concern: ${data.concern}
+Refund: ${data.refund}
 Partner: ${data.partner}`;
 
 document.getElementById("note").innerText = lastNote;
@@ -373,7 +381,8 @@ html += `
 <td style="text-align:center">${x.phone || ""}</td>
 <td style="text-align:center">${x.name || ""}</td>
 <td style="text-align:center">${x.order || ""}</td>
-<td style="text-align:center">${x.issue || ""}</td>
+<td style="text-align:center">${x.issue || ""}</td>\
+<td style="text-align:center">${x.refund || ""}</td>
 <td style="text-align:center">${x.partner || ""}</td>
 <td style="text-align:center">${x.agent || ""}</td>
 <td style="text-align:center">${x.createdBy || ""}</td>
@@ -414,9 +423,9 @@ document.querySelectorAll("input,textarea").forEach(e=>e.value="");
 
 /* all right for uniserve */
 window.csv = function(){
-let csv="Name,Order,Issue,Partner,Agent\n";
+let csv="Name,Order,Issue,Refund,Partner,Agent\n";
 allData.forEach(x=>{
-csv+=`${x.name},${x.order},${x.issue},${x.partner},${x.agent}\n`;
+csv+=`${x.name},${x.order},${x.issue},${x.refund},${x.partner},${x.agent}\n`;
 });
 let b=new Blob([csv],{type:"text/csv"});
 let a=document.createElement("a");
