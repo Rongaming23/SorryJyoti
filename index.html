@@ -2,463 +2,1200 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Wow Case Crm By Uniserve</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jyoti, I'm Sorry ❤️</title>
 
 <style>
 
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-background:#111827;
-border-radius:12px;
-overflow:hidden;
+/* =========================
+   BASIC RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-th{
-background:#1e293b;
-text-align:center;
-padding:12px;
-font-size:14px;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
-td{
-text-align:center;
-padding:12px;
-color:#e5e7eb;
+body {
+    background:
+        radial-gradient(circle at top, #35105f 0%, #12051f 45%, #050208 100%);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
-tr:hover{
-background:#1f2937;
-transition:0.2s;
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 105, 180, 0.12), transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(150, 80, 255, 0.12), transparent 30%);
+    z-index: -2;
 }
 
-tbody tr{
-border-bottom:1px solid #1f2937;
+/* =========================
+   SCREENS
+========================= */
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    padding: 25px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.card h3{
-margin-bottom:10px;
-}
-  
-body{margin:0;font-family:Segoe UI;background:#0f172a;color:white}
-.container{padding:20px;max-width:1200px;margin:auto}
-
-.card{background:#111827;padding:15px;border-radius:12px;margin-bottom:15px}
-
-input,select,textarea{
-width:100%;padding:10px;margin:5px 0;
-background:#1e293b;color:white;border:1px solid #334155;border-radius:8px
+.screen.active {
+    display: flex;
 }
 
-button{padding:10px 15px;margin:5px;border-radius:8px;border:none;cursor:pointer}
-.primary{background:#3b82f6;color:white}
-.success{background:#22c55e;color:white}
-.danger{background:#ef4444;color:white}
+/* =========================
+   CARD
+========================= */
 
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{padding:10px;border-bottom:1px solid #1f2937}
+.card {
+    width: min(92%, 650px);
+    padding: 35px 25px;
+    border-radius: 25px;
 
-pre{background:#0b1220;padding:10px;border-radius:10px;white-space:pre-wrap}
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.45),
+        inset 0 0 30px rgba(255, 255, 255, 0.03);
+}
+
+/* =========================
+   TEXT
+========================= */
+
+h1 {
+    font-size: clamp(30px, 7vw, 55px);
+    margin-bottom: 20px;
+    line-height: 1.15;
+}
+
+h2 {
+    font-size: clamp(25px, 6vw, 40px);
+    margin-bottom: 18px;
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+button,
+.surprise-button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 28px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: linear-gradient(
+        135deg,
+        #ff5ca8,
+        #a66cff
+    );
+
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 30px rgba(255, 80, 170, 0.25);
+
+    transition: 0.3s ease;
+}
+
+button:hover,
+.surprise-button:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 15px 40px rgba(255, 80, 170, 0.4);
+}
+
+/* =========================
+   INPUT
+========================= */
+
+input {
+    width: min(90%, 400px);
+    padding: 15px 20px;
+
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    outline: none;
+    text-align: center;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.55);
+}
+
+input:focus {
+    border-color: rgba(255,105,180,0.7);
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error {
+    margin-top: 15px;
+    color: #ff8fba;
+    font-size: 14px;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-heart {
+    font-size: 70px;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+#countdown {
+    font-size: clamp(70px, 20vw, 150px);
+    font-weight: bold;
+
+    background: linear-gradient(
+        135deg,
+        #ff6eb4,
+        #b77aff
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: countdownPulse 1s infinite;
+}
+
+@keyframes countdownPulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+/* =========================
+   STORY
+========================= */
+
+.story-wrapper {
+    width: min(94vw, 900px);
+}
+
+.story-card {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 20px 80px rgba(0,0,0,0.5);
+}
+
+.story-card img {
+    display: block;
+
+    width: 100%;
+    max-height: 70vh;
+
+    object-fit: contain;
+
+    background: black;
+
+    animation: photoZoom 6s linear;
+}
+
+@keyframes photoZoom {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.07);
+    }
+
+}
+
+.story-caption {
+    padding: 25px;
+
+    font-size: clamp(17px, 3vw, 24px);
+
+    line-height: 1.6;
+
+    min-height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.progress {
+    width: 100%;
+    height: 5px;
+
+    background: rgba(255,255,255,0.12);
+}
+
+#bar {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #ff5da2,
+        #a66cff
+    );
+
+    transition: width 0.5s ease;
+}
+
+/* =========================
+   FINAL HEART
+========================= */
+
+.final-heart {
+    font-size: 80px;
+    margin-bottom: 20px;
+
+    animation: heartbeat 1.5s infinite;
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-heart {
+    position: fixed;
+
+    bottom: -50px;
+
+    font-size: 20px;
+
+    pointer-events: none;
+
+    animation: floatHeart linear forwards;
+
+    z-index: 100;
+}
+
+@keyframes floatHeart {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+        opacity: 0;
+    }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .screen {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 28px 18px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .story-caption {
+        padding: 18px;
+        font-size: 17px;
+    }
+
+    .story-card img {
+        max-height: 65vh;
+    }
+
+    button,
+    .surprise-button {
+        padding: 13px 23px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<body>
+<!-- =====================================
+     BACKGROUND MUSIC
+===================================== -->
 
-<div id="authBox" style="
-position:fixed;
-inset:0;
-background:#0f172a;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:9999;
-color:white;
-">
-
-<h2>🔐  Uniserve crm Login</h2>
-
-<input id="email" placeholder="Email" style="padding:10px;margin:5px;width:250px;">
-<input id="password" type="password" placeholder="Password" style="padding:10px;margin:5px;width:250px;">
-
-<button onclick="login()" style="padding:10px 20px;background:#3b82f6;color:white;border:none;">
-Login
-</button>
-
-<p id="msg"></p>
-</div>
-  
-<div class="container">
-
-<div style="display:flex;justify-content:space-between;align-items:center;">
-  <h2>🚀 Uniserve CRM Online v2</h2>
-
-  <button onclick="logout()" style="
-    background:#ef4444;
-    color:white;
-    padding:8px 12px;
-    border:none;
-    border-radius:6px;
-  ">
-    Logout
-  </button>
-</div>
-
-<div class="card" style="overflow-x:auto;">
-<h3>📈 On Going Live Cases</h3>
-<div id="reportBox">Loading reports...</div>
-</div>
-  
-<input id="name" placeholder="Customer Name">
-<input id="phone" placeholder="Phone">
-<input id="order" placeholder="Order ID">
-<input id="date" placeholder="Enter Order Date">
-<input id="outlet" placeholder="Outlet">
-
-  
-<textarea id="concern" placeholder="Customer Concern"></textarea>
+<audio
+    id="music"
+    src="song.mp3"
+    preload="auto">
+</audio>
 
 
-  
-<select id="issue">
-<option>Missing Item</option>
-<option>Cancel Request</option>
-<option>Wrong Order</option>
-<option>Delayed Order</option>
-<option>Veg / Non-Veg Concern</option>
-<option>Refund Request</option>
-<option>Bulk Order Query</option>
-<option>Complaint</option>
-<option>Business Query</option>
-<option>Food Quality Issue</option>
-<option>Packaging Issue</option>
-<option>Payment Issue</option>
-<option>Outlet Complaint</option>
-<option>Delivery Partner Issue</option>
-<option>Instruction</option>
-</select>
+<!-- =====================================
+     LOADING SCREEN
+===================================== -->
 
-<select id="refund">
-<option>Source Payment</option>
-<option>Wallet</option>
-</select>  
-  
-<select id="partner">
-<option>Swiggy</option>
-<option>Zomato</option>
-<option>Magicpin</option>
-<option>WowEats</option>
-<option>Direct Outlet</option>
-<option>Uber Eats</option>
-</select>
+<section id="loading" class="screen active">
 
-<select id="agent">
-<option>Parth</option>
-<option>Riya</option>
-<option>Biswajit</option>
-<option>Soumili</option>
-<option>Shayonika</option>
-</select>
+    <div class="card">
 
-<button class="primary" onclick="addCase()">Generate Case</button>
-<button class="success" onclick="copyCase()">Copy Case</button>
-<button class="danger" onclick="clearForm()">Clear</button>
-<button class="success" onclick="csv()">CSV</button>
-<button class="success" onclick="whatsapp()">WhatsApp</button>
+        <div class="loading-heart">
+            ❤️
+        </div>
 
-</div>
+        <h1>
+            Preparing Something Special...
+        </h1>
 
-<div class="card">
-<h3>📄 Case Note</h3>
-<pre id="note">No case generated</pre>
-</div>
+        <p>
+            Just a little surprise for Jyoti.
+        </p>
 
-<div class="card">
-<h3>📁 Cases</h3>
+    </div>
 
-<input id="search" placeholder="Search Order ID..." onkeyup="filter()">
+</section>
 
-<table>
-<thead>
-<tr>
-<th>Id</th>
-<th>Phone</th>
-<th>Name</th>
-<th>Order</th>
-<th>Issue</th>
-<th>Refund</th>
-<th>Partner</th>
-<th>Agent</th>
-<th>Created By</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody id="table"></tbody>
-</table>
 
-</div>
+<!-- =====================================
+     WELCOME SCREEN
+===================================== -->
 
-</div>
+<section id="welcome" class="screen">
 
-<script type="module">
+    <div class="card">
 
-import {
-getAuth,
-signInWithEmailAndPassword,
-onAuthStateChanged,
-signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-getFirestore,
-collection,
-addDoc,
-onSnapshot,
-deleteDoc,
-doc,
-query,
-orderBy,
-serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        <h1>
+            Jyoti, I'm Sorry ❤️
+        </h1>
 
-const firebaseConfig = {
-apiKey: "AIzaSyAdR4XaDcs2M7o43j2pu6K1zA3FhCrK-cA",
-authDomain: "customerdetailsuniserve.firebaseapp.com",
-projectId: "customerdetailsuniserve",
-storageBucket: "customerdetailsuniserve.firebasestorage.app",
-messagingSenderId: "125960501611",
-appId: "1:125960501611:web:4fbbe720ce8a063afbb42e",
-measurementId: "G-YK03S135FK"
-};
+        <p>
+            Before we begin, there is something
+            I want you to see.
+        </p>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+        <input
+            id="nameInput"
+            type="text"
+            placeholder="Enter your name">
 
-window.login = async function () {
-let email = document.getElementById("email").value;
-let pass = document.getElementById("password").value;
+        <br>
 
-try {
-await signInWithEmailAndPassword(auth, email, pass);
-document.getElementById("msg").innerText = "Login success";
-} catch (e) {
-document.getElementById("msg").innerText = e.message;
+        <button onclick="checkName()">
+            Enter ❤️
+        </button>
+
+        <div
+            id="nameError"
+            class="error">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     QUESTION 1
+===================================== -->
+
+<section id="question1" class="screen">
+
+    <div class="card">
+
+        <h1>
+            Jyoti ❤️
+        </h1>
+
+        <p>
+            Are you ready to see something
+            made especially for you?
+        </p>
+
+        <button onclick="nextQ1()">
+            Yes ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     QUESTION 2
+===================================== -->
+
+<section id="question2" class="screen">
+
+    <div class="card">
+
+        <h1>
+            One More Question...
+        </h1>
+
+        <p>
+            Will you give me a few minutes
+            to tell you what is in my heart?
+        </p>
+
+        <button onclick="nextQ2()">
+            Continue ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     COUNTDOWN
+===================================== -->
+
+<section id="truth" class="screen">
+
+    <div class="card">
+
+        <h1>
+            Something Is Waiting...
+        </h1>
+
+        <p>
+            Take a breath.
+        </p>
+
+        <div id="countdown">
+            3
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     STORY INTRO
+===================================== -->
+
+<section id="intro" class="screen">
+
+    <div class="card">
+
+        <h1>
+            For Jyoti ❤️
+        </h1>
+
+        <p>
+            Some feelings are difficult to explain
+            in a simple message.
+        </p>
+
+        <p style="margin-top:15px;">
+            So I made this little journey instead.
+        </p>
+
+        <button onclick="startStory()">
+            Show Me ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     PHOTO STORY
+===================================== -->
+
+<section id="story" class="screen">
+
+    <div class="story-wrapper">
+
+        <div class="story-card">
+
+            <img
+                id="photo"
+                src="photo1.jpg"
+                alt="Memory">
+
+            <div
+                id="storyText"
+                class="story-caption">
+            </div>
+
+            <div class="progress">
+
+                <div id="bar"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     REASONS
+===================================== -->
+
+<section id="reasons" class="screen">
+
+    <div class="card">
+
+        <h1>
+            Why You Matter ❤️
+        </h1>
+
+        <p>
+            Because somewhere between the
+            conversations, little moments and
+            memories, you became someone
+            genuinely important to me.
+        </p>
+
+        <p style="margin-top:15px;">
+            Your presence brought moments that
+            I will always remember.
+        </p>
+
+        <button onclick="showPromise()">
+            Continue ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     PROMISE
+===================================== -->
+
+<section id="promise" class="screen">
+
+    <div class="card">
+
+        <h1>
+            My Promise
+        </h1>
+
+        <p>
+            I know that mistakes cannot simply
+            be erased by saying sorry.
+        </p>
+
+        <p style="margin-top:15px;">
+            What I can do is learn from them,
+            communicate better, respect your
+            boundaries and be more careful with
+            the things that matter.
+        </p>
+
+        <p style="margin-top:15px;">
+            I don't want this message to be
+            another empty promise.
+        </p>
+
+        <button onclick="showLetter()">
+            Read My Letter ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     LETTER
+===================================== -->
+
+<section id="letter" class="screen">
+
+    <div class="card">
+
+        <h1>
+            A Letter For Jyoti 💌
+        </h1>
+
+        <p>
+            Jyoti, I know that saying sorry cannot
+            change the past.
+        </p>
+
+        <p style="margin-top:15px;">
+            I know that some moments may have
+            hurt more than I understood at the time.
+        </p>
+
+        <p style="margin-top:15px;">
+            I'm not asking you to forget anything.
+            I'm only hoping that my actions from
+            now onward can show that I understood
+            my mistakes.
+        </p>
+
+        <p style="margin-top:15px;">
+            Thank you for every conversation,
+            every memory and every little moment
+            that made this journey meaningful.
+        </p>
+
+        <p style="margin-top:15px;">
+            I'm genuinely sorry. ❤️
+        </p>
+
+        <button onclick="showForever()">
+            One Last Thing ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     FINAL SCREEN
+===================================== -->
+
+<section id="forever" class="screen">
+
+    <div class="card">
+
+        <div class="final-heart">
+            ❤️
+        </div>
+
+        <h1>
+            Thank You, Jyoti
+        </h1>
+
+        <p>
+            Whatever happens next, thank you
+            for being part of these memories.
+        </p>
+
+        <p style="margin-top:15px;">
+            This little website was made with
+            one simple intention:
+            to say something that was difficult
+            to fit into a normal message.
+        </p>
+
+        <a
+            class="surprise-button"
+            href="YOUR_DIGIBOUQUET_LINK_HERE"
+            target="_blank"
+            rel="noopener noreferrer">
+            Open Your Surprise 🌹
+        </a>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================
+   SCREEN SYSTEM
+===================================== */
+
+function showScreen(id) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+
+            screen.classList.remove("active");
+
+        });
+
+    const target =
+        document.getElementById(id);
+
+    if (target) {
+
+        target.classList.add("active");
+
+    }
+
 }
-};
-
-let userRole = "agent";
-
-onAuthStateChanged(auth,(user)=>{
-if(user){
 
 
-if(user.email === "sankudas@crm.com"){
-userRole = "admin";
-}else{
-userRole = "agent";
-}
+/* =====================================
+   LOADING SCREEN
+===================================== */
 
-document.getElementById("authBox").style.display="none";
-}else{
-document.getElementById("authBox").style.display="flex";
-}
-});
+setTimeout(() => {
+
+    showScreen("welcome");
+
+}, 4000);
 
 
-window.logout = function(){
-signOut(auth);
-}
-const ref = collection(db,"cases");
+/* =====================================
+   NAME CHECK
+===================================== */
 
-let allData = [];
-let lastNote = "";
+function checkName() {
 
-/* all right for uniserve */
-const get = id => document.getElementById(id).value;
+    const input =
+        document.getElementById("nameInput");
 
-/* all right for uniserve */
-window.addCase = async function(){
+    const name =
+        input.value
+        .toLowerCase()
+        .trim();
 
-const data = {
-name:get("name"),
-phone:get("phone"),
-order:get("order"),
-date:get("date"),
-outlet:get("outlet"),
-concern:get("concern"),
-issue:get("issue"),
-refund:get("refund"),
-partner:get("partner"),
-agent:get("agent"),
-createdBy: auth.currentUser ? auth.currentUser.email : "unknown",
-time:serverTimestamp()
-};
+    if (name.includes("jyoti")) {
 
-if(!data.name || !data.order){
-alert("Name & Order required");
-return;
+        showScreen("question1");
+
+    } else {
+
+        document
+            .getElementById("nameError")
+            .textContent =
+            "Hmm... try again ❤️";
+
+    }
+
 }
 
 
-  
-await addDoc(ref,data);
+/* =====================================
+   QUESTION 1
+===================================== */
 
-/* case section dont play otherwise Parth will kill you */
-lastNote =
-`Name: ${data.name}
-Phone: ${data.phone}
-Order: ${data.order}
-Date: ${data.date}
-Outlet: ${data.outlet}
-Issue: ${data.issue} : Concern: ${data.concern}
-Refund: ${data.refund}
-Partner: ${data.partner}`;
+function nextQ1() {
 
-document.getElementById("note").innerText = lastNote;
+    showScreen("question2");
 
-clearForm();
 }
 
-  
-function updateReports(){
 
-let map = {};
+/* =====================================
+   QUESTION 2
+===================================== */
 
-allData.forEach(x=>{
-let key = x.issue || "Unknown";
-map[key] = (map[key] || 0) + 1;
-});
+function nextQ2() {
 
-let html = "";
+    showCountdown();
 
-Object.keys(map).forEach(issue=>{
-html += `
-<div style="
-background:#1e293b;
-padding:10px;
-margin:5px 0;
-border-radius:8px;
-display:flex;
-justify-content:space-between;
-">
-<span>${issue}</span>
-<b>${map[issue]}</b>
-</div>`;
-});
-
-document.getElementById("reportBox").innerHTML = html || "No data";
-}
-  
-  
-/* all right for uniserve */
-onSnapshot(query(ref, orderBy("time", "desc")), (snap) => {
-
-allData = [];
-let html = "";
-let i = 1;
-
-snap.forEach((d) => {
-let x = d.data();
-x._id = d.id;
-
-/* ROLE FILTER */
-if (userRole === "admin") {
-allData.push(x);
-} else if (x.createdBy === auth.currentUser?.email) {
-allData.push(x);
-}
-});
-
-allData.forEach((x) => {
-html += `
-<tr>
-<td>CX${String(i++).padStart(5, "0")}</td>
-<td style="text-align:center">${x.phone || ""}</td>
-<td style="text-align:center">${x.name || ""}</td>
-<td style="text-align:center">${x.order || ""}</td>
-<td style="text-align:center">${x.issue || ""}</td>\
-<td style="text-align:center">${x.refund || ""}</td>
-<td style="text-align:center">${x.partner || ""}</td>
-<td style="text-align:center">${x.agent || ""}</td>
-<td style="text-align:center">${x.createdBy || ""}</td>
-<td>
-${userRole === "admin"
-? `<button class="danger" onclick="del('${x._id}')">Delete</button>`
-: `<span style="color:#64748b;">No Access</span>`
-}
-</td>
-</tr>`;
-});
-
-document.getElementById("table").innerHTML = html;
-
-updateReports();
-});
-
-/* all right for uniserve */
-window.del = async function(id){
-
-if(userRole !== "admin"){
-alert("❌ Only admin can delete cases");
-return;
 }
 
-await deleteDoc(doc(db,"cases",id));
+
+/* =====================================
+   COUNTDOWN
+===================================== */
+
+function showCountdown() {
+
+    showScreen("truth");
+
+    let number = 3;
+
+    const countdown =
+        document.getElementById("countdown");
+
+    countdown.textContent = number;
+
+    const timer =
+        setInterval(() => {
+
+            number--;
+
+            countdown.textContent = number;
+
+            if (number <= 0) {
+
+                clearInterval(timer);
+
+                showScreen("intro");
+
+            }
+
+        }, 1000);
+
 }
 
-/* all right for uniserve */
-window.copyCase = function(){
-navigator.clipboard.writeText(lastNote || "");
+
+/* =====================================
+   PHOTOS
+===================================== */
+
+const photos = [
+
+    "photo1.jpg",
+    "photo2.jpg",
+    "photo3.jpg",
+    "photo4.jpg",
+    "photo5.jpg",
+    "photo6.jpg",
+    "photo7.jpg",
+    "photo8.jpg",
+    "photo9.jpg",
+    "photo10.jpg",
+    "photo11.jpg",
+    "photo12.jpg",
+    "photo13.jpg",
+    "photo14.jpg",
+    "photo15.jpg"
+
+];
+
+
+/* =====================================
+   PHOTO MESSAGES
+===================================== */
+
+const messages = [
+
+    "Some people enter our life unexpectedly...",
+
+    "And somehow become incredibly important.",
+
+    "Every conversation slowly became a memory.",
+
+    "Every little moment started meaning something.",
+
+    "I know I have made mistakes.",
+
+    "And I know some words and actions can hurt.",
+
+    "I'm not asking you to forget the past.",
+
+    "I'm asking you to see that I am learning.",
+
+    "I want to become a better version of myself.",
+
+    "I want to protect the peace between us.",
+
+    "Thank you for every beautiful memory.",
+
+    "Thank you for every little moment.",
+
+    "Some feelings are difficult to explain.",
+
+    "But genuine feelings can still be shown through actions.",
+
+    "I'm sorry, Jyoti. ❤️"
+
+];
+
+
+/* =====================================
+   SLIDESHOW VARIABLES
+===================================== */
+
+let currentPhoto = 0;
+
+let slideTimer = null;
+
+const SLIDE_TIME = 6000;
+
+
+/* =====================================
+   START STORY
+===================================== */
+
+function startStory() {
+
+    currentPhoto = 0;
+
+    clearTimeout(slideTimer);
+
+    showScreen("story");
+
+    const music =
+        document.getElementById("music");
+
+    music.volume = 0.65;
+
+    music.play().catch(() => {
+
+        console.log(
+            "Music playback was blocked by the browser."
+        );
+
+    });
+
+    showSlide();
+
 }
 
-/* all right for uniserve */
-window.clearForm = function(){
-document.querySelectorAll("input,textarea").forEach(e=>e.value="");
+
+/* =====================================
+   SHOW SLIDE
+===================================== */
+
+function showSlide() {
+
+    clearTimeout(slideTimer);
+
+    const photo =
+        document.getElementById("photo");
+
+    const text =
+        document.getElementById("storyText");
+
+    const bar =
+        document.getElementById("bar");
+
+
+    /* Finished */
+
+    if (currentPhoto >= photos.length) {
+
+        finishStory();
+
+        return;
+
+    }
+
+
+    /* Restart animation */
+
+    photo.style.animation = "none";
+
+    void photo.offsetWidth;
+
+    photo.style.animation =
+        "photoZoom 6s linear";
+
+
+    /* Change image */
+
+    photo.src =
+        photos[currentPhoto];
+
+
+    /* Change caption */
+
+    text.textContent =
+        messages[currentPhoto];
+
+
+    /* Progress */
+
+    const percent =
+        ((currentPhoto + 1) /
+        photos.length) * 100;
+
+    bar.style.width =
+        percent + "%";
+
+
+    /* Next photo */
+
+    slideTimer =
+        setTimeout(() => {
+
+            currentPhoto++;
+
+            showSlide();
+
+        }, SLIDE_TIME);
+
 }
 
-/* all right for uniserve */
-window.csv = function(){
-let csv="Name,Order,Issue,Refund,Partner,Agent\n";
-allData.forEach(x=>{
-csv+=`${x.name},${x.order},${x.issue},${x.refund},${x.partner},${x.agent}\n`;
-});
-let b=new Blob([csv],{type:"text/csv"});
-let a=document.createElement("a");
-a.href=URL.createObjectURL(b);
-a.download="cases.csv";
-a.click();
+
+/* =====================================
+   FINISH STORY
+===================================== */
+
+function finishStory() {
+
+    clearTimeout(slideTimer);
+
+    document
+        .getElementById("bar")
+        .style.width = "100%";
+
+    setTimeout(() => {
+
+        showScreen("reasons");
+
+    }, 800);
+
 }
 
-/* all right for uniserve */
-window.whatsapp = function(){
-window.open("https://wa.me/?text="+encodeURIComponent(lastNote));
+
+/* =====================================
+   PROMISE
+===================================== */
+
+function showPromise() {
+
+    showScreen("promise");
+
 }
 
-/* all right for uniserve */
-window.filter = function(){
-let v=document.getElementById("search").value.toLowerCase();
-document.querySelectorAll("tbody tr").forEach(r=>{
-r.style.display=r.innerText.toLowerCase().includes(v)?"":"none";
-});
+
+/* =====================================
+   LETTER
+===================================== */
+
+function showLetter() {
+
+    showScreen("letter");
+
 }
+
+
+/* =====================================
+   FINAL
+===================================== */
+
+function showForever() {
+
+    showScreen("forever");
+
+}
+
+
+/* =====================================
+   FLOATING HEARTS
+===================================== */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "floating-heart";
+
+    heart.textContent =
+        Math.random() > 0.5
+        ? "❤️"
+        : "💗";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (14 + Math.random() * 20) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 6) + "s";
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 12000);
+
+}
+
+
+/* Create hearts periodically */
+
+setInterval(createHeart, 900);
 
 </script>
-<footer style="
-margin-top:40px;
-text-align:center;
-padding:20px;
-color:#cbd5e1;
-font-size:14px;
-background:rgba(255,255,255,0.03);
-border-radius:12px;
-backdrop-filter:blur(10px);
-">
-  Built with by <b>Parth</b> • Uniserve System v2 © 2026
-</footer>
+
 </body>
 </html>
