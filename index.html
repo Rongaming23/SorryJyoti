@@ -7,19 +7,13 @@
 <title>Jyoti, I'm Sorry ❤️</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html,
-body {
+html, body {
     width: 100%;
     min-height: 100%;
 }
@@ -27,690 +21,437 @@ body {
 body {
     min-height: 100vh;
     overflow-x: hidden;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color: white;
-
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(
-            circle at 50% 0%,
-            #5b197d 0%,
-            #261044 28%,
-            #10051f 60%,
-            #030107 100%
-        );
+        radial-gradient(circle at 50% -10%, #68208d 0%, transparent 38%),
+        radial-gradient(circle at 10% 60%, rgba(255, 35, 145, .20), transparent 30%),
+        radial-gradient(circle at 90% 75%, rgba(110, 65, 255, .22), transparent 32%),
+        linear-gradient(145deg, #09020f, #18051f 45%, #050108);
 }
 
-/* =========================================================
-   MOVING LIGHTS
-========================================================= */
+/* ================================
+   BACKGROUND LIGHTS
+================================ */
 
 body::before,
 body::after {
     content: "";
     position: fixed;
-    inset: -30%;
+    inset: -20%;
     pointer-events: none;
-    z-index: -10;
+    z-index: -5;
 }
 
 body::before {
     background:
-        radial-gradient(
-            circle at 20% 30%,
-            rgba(255, 73, 164, .24),
-            transparent 20%
-        ),
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(146, 84, 255, .25),
-            transparent 22%
-        ),
-        radial-gradient(
-            circle at 60% 80%,
-            rgba(255, 50, 145, .15),
-            transparent 25%
-        );
-
-    filter: blur(35px);
-
-    animation:
-        auroraMove 14s ease-in-out infinite alternate;
+        radial-gradient(circle, rgba(255, 75, 170, .12), transparent 25%);
+    animation: ambientMove 12s ease-in-out infinite alternate;
 }
 
 body::after {
     background:
         linear-gradient(
-            120deg,
+            115deg,
             transparent 35%,
             rgba(255,255,255,.035) 50%,
             transparent 65%
         );
-
-    transform: rotate(-15deg);
-
-    animation:
-        lightSweep 10s linear infinite;
+    animation: lightSweep 9s linear infinite;
 }
 
-@keyframes auroraMove {
-
-    0% {
+@keyframes ambientMove {
+    from {
         transform: translate(-5%, -3%) scale(1);
     }
-
-    50% {
-        transform: translate(5%, 4%) scale(1.08);
-    }
-
-    100% {
-        transform: translate(-2%, 7%) scale(1.15);
+    to {
+        transform: translate(5%, 4%) scale(1.2);
     }
 }
 
 @keyframes lightSweep {
-
     from {
-        transform: translateX(-35%) rotate(-15deg);
+        transform: translateX(-35%) rotate(5deg);
     }
-
     to {
-        transform: translateX(35%) rotate(-15deg);
+        transform: translateX(35%) rotate(5deg);
     }
 }
 
-/* =========================================================
-   STAR FIELD
-========================================================= */
+/* ================================
+   STARS
+================================ */
 
 #stars {
     position: fixed;
     inset: 0;
     overflow: hidden;
     pointer-events: none;
-    z-index: -5;
+    z-index: 0;
 }
 
 .star {
     position: absolute;
-
-    width: 2px;
-    height: 2px;
-
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
-
     background: white;
-
-    box-shadow:
-        0 0 5px white,
-        0 0 12px rgba(255, 160, 220, .8);
-
-    animation:
-        twinkle var(--duration) ease-in-out infinite;
-}
-
-.star.big {
-    width: 4px;
-    height: 4px;
-
-    box-shadow:
-        0 0 7px white,
-        0 0 18px #ff8fcb,
-        0 0 30px rgba(255, 80, 170, .5);
+    box-shadow: 0 0 10px white, 0 0 18px #ff8ad0;
+    animation: twinkle ease-in-out infinite;
 }
 
 @keyframes twinkle {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: .15;
         transform: scale(.6);
     }
-
     50% {
         opacity: 1;
         transform: scale(1.5);
     }
 }
 
-/* =========================================================
-   FLOATING ROMANTIC WORDS
-========================================================= */
+/* ================================
+   FLOATING TEXT
+================================ */
 
-#floatingWords {
+#floatingText {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.float-message {
+    position: absolute;
+    white-space: nowrap;
+    color: rgba(255, 210, 235, .16);
+    font-weight: bold;
+    font-size: clamp(14px, 2vw, 22px);
+    text-shadow: 0 0 15px rgba(255, 60, 170, .4);
+    animation: floatAcross linear forwards;
+}
+
+@keyframes floatAcross {
+    from {
+        transform: translateX(110vw) translateY(0) rotate(-4deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: .8;
+    }
+    90% {
+        opacity: .8;
+    }
+    to {
+        transform: translateX(-130vw) translateY(-80px) rotate(4deg);
+        opacity: 0;
+    }
+}
+
+/* ================================
+   HEARTS
+================================ */
+
+#hearts {
     position: fixed;
     inset: 0;
     pointer-events: none;
     overflow: hidden;
-    z-index: 20;
+    z-index: 3;
 }
 
-.floating-word {
+.floating-heart {
     position: absolute;
-
-    color: rgba(255, 194, 225, .72);
-
-    font-size: clamp(12px, 2vw, 18px);
-    font-weight: 600;
-
-    letter-spacing: 1px;
-
-    text-shadow:
-        0 0 8px rgba(255, 85, 180, .8),
-        0 0 20px rgba(255, 85, 180, .35);
-
-    white-space: nowrap;
-
-    animation:
-        floatWord var(--word-time) linear forwards;
+    bottom: -60px;
+    animation: heartRise linear forwards;
+    filter: drop-shadow(0 0 8px rgba(255, 70, 170, .7));
 }
 
-@keyframes floatWord {
-
+@keyframes heartRise {
     0% {
-        transform:
-            translateY(30px)
-            translateX(0)
-            rotate(var(--rotation));
-
+        transform: translateY(0) rotate(0deg) scale(.6);
         opacity: 0;
     }
 
-    12% {
-        opacity: .85;
-    }
-
-    80% {
-        opacity: .65;
+    10% {
+        opacity: .9;
     }
 
     100% {
         transform:
             translateY(-115vh)
             translateX(var(--drift))
-            rotate(var(--rotation));
-
+            rotate(360deg)
+            scale(1.2);
         opacity: 0;
     }
 }
 
-/* =========================================================
+/* ================================
    SCREENS
-========================================================= */
+================================ */
 
 .screen {
     display: none;
-
-    width: 100%;
+    position: relative;
+    z-index: 10;
     min-height: 100vh;
-
-    padding: 25px;
-
+    width: 100%;
+    padding: 25px 15px;
     justify-content: center;
     align-items: center;
-
     text-align: center;
-
-    position: relative;
 }
 
 .screen.active {
     display: flex;
-
-    animation:
-        screenIn .8s ease both;
+    animation: screenIn .8s ease both;
 }
 
 @keyframes screenIn {
-
     from {
         opacity: 0;
-        transform: scale(.97);
+        transform: scale(.97) translateY(15px);
     }
-
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
     }
 }
 
-/* =========================================================
-   GLASS CARD
-========================================================= */
+/* ================================
+   CARD
+================================ */
 
 .card {
-    position: relative;
-
-    width: min(92%, 680px);
-
-    padding: 45px 30px;
+    width: min(92vw, 680px);
+    padding: 42px 28px;
 
     border-radius: 30px;
 
     background:
         linear-gradient(
-            135deg,
+            145deg,
             rgba(255,255,255,.12),
-            rgba(255,255,255,.035)
+            rgba(255,255,255,.045)
         );
 
-    border:
-        1px solid rgba(255,255,255,.20);
+    border: 1px solid rgba(255,255,255,.18);
 
-    backdrop-filter:
-        blur(20px)
-        saturate(150%);
-
-    -webkit-backdrop-filter:
-        blur(20px)
-        saturate(150%);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
     box-shadow:
-        0 30px 100px rgba(0,0,0,.6),
+        0 30px 100px rgba(0,0,0,.55),
         inset 0 0 40px rgba(255,255,255,.025),
-        0 0 50px rgba(255,75,170,.08);
-
-    overflow: hidden;
+        0 0 50px rgba(255,50,170,.08);
 }
-
-.card::before {
-    content: "";
-
-    position: absolute;
-
-    width: 200px;
-    height: 200px;
-
-    top: -100px;
-    right: -100px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 120, 210, .28),
-            transparent 70%
-        );
-
-    filter: blur(10px);
-
-    pointer-events: none;
-}
-
-.card::after {
-    content: "";
-
-    position: absolute;
-    inset: 1px;
-
-    border-radius: 29px;
-
-    border:
-        1px solid rgba(255,255,255,.04);
-
-    pointer-events: none;
-}
-
-/* =========================================================
-   TYPOGRAPHY
-========================================================= */
 
 h1 {
-    position: relative;
-    z-index: 2;
-
-    font-size:
-        clamp(34px, 8vw, 62px);
-
-    line-height: 1.1;
-
+    font-size: clamp(32px, 8vw, 58px);
+    line-height: 1.12;
     margin-bottom: 22px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #ffd4eb,
-            #ff73b5,
-            #c58cff
-        );
+    background: linear-gradient(
+        120deg,
+        #fff,
+        #ffb5da,
+        #d39cff,
+        #fff
+    );
 
+    background-size: 250% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    text-shadow:
-        0 0 30px rgba(255, 90, 180, .18);
+    animation: textGlow 5s linear infinite;
 }
 
 h2 {
-    font-size:
-        clamp(26px, 6vw, 42px);
-
     margin-bottom: 18px;
 }
 
-p {
-    position: relative;
-    z-index: 2;
-
-    font-size: 17px;
-
-    line-height: 1.85;
-
-    color:
-        rgba(255,255,255,.88);
+@keyframes textGlow {
+    to {
+        background-position: 250% center;
+    }
 }
 
-/* =========================================================
-   GLOWING BUTTONS
-========================================================= */
+p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.88);
+}
+
+/* ================================
+   BUTTON
+================================ */
 
 button,
 .surprise-button {
-
-    position: relative;
-    z-index: 5;
-
     display: inline-block;
+    margin-top: 27px;
+    padding: 15px 30px;
 
-    margin-top: 28px;
-
-    padding: 15px 32px;
-
-    border: none;
+    border: 0;
     border-radius: 999px;
 
     color: white;
-
-    font-size: 16px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    text-decoration: none;
-
     background:
         linear-gradient(
             135deg,
-            #ff4f9a,
-            #ff76bd,
-            #9865ff
+            #ff4fa3,
+            #a56bff
         );
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    text-decoration: none;
 
     box-shadow:
-        0 10px 35px rgba(255, 55, 155, .30),
-        inset 0 1px 1px rgba(255,255,255,.35);
+        0 10px 35px rgba(255,50,160,.3),
+        inset 0 1px rgba(255,255,255,.35);
 
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-}
-
-button::before,
-.surprise-button::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 25%,
-            rgba(255,255,255,.35),
-            transparent 75%
-        );
-
-    transform: translateX(-100%);
-
-    transition: transform .5s ease;
+    transition: transform .25s ease, box-shadow .25s ease;
 }
 
 button:hover,
 .surprise-button:hover {
-    transform:
-        translateY(-4px)
-        scale(1.04);
+    transform: translateY(-4px) scale(1.04);
 
     box-shadow:
-        0 15px 50px rgba(255, 60, 160, .48),
-        0 0 25px rgba(255, 120, 210, .25);
+        0 18px 50px rgba(255,50,160,.5);
 }
 
-button:hover::before,
-.surprise-button:hover::before {
-    transform: translateX(100%);
+button:active {
+    transform: scale(.97);
 }
 
-/* =========================================================
+/* ================================
    INPUT
-========================================================= */
+================================ */
 
 input {
-    position: relative;
-    z-index: 5;
-
     width: min(90%, 400px);
-
-    padding: 16px 22px;
-
-    margin-top: 15px;
+    margin-top: 18px;
+    padding: 16px 20px;
 
     border-radius: 999px;
-
-    border:
-        1px solid rgba(255,255,255,.20);
+    border: 1px solid rgba(255,255,255,.2);
 
     outline: none;
 
-    text-align: center;
-
-    font-size: 16px;
-
     color: white;
+    background: rgba(255,255,255,.08);
 
-    background:
-        rgba(255,255,255,.08);
-
-    backdrop-filter: blur(10px);
-
-    box-shadow:
-        inset 0 0 15px rgba(255,255,255,.025);
-
-    transition: .3s ease;
-}
-
-input:focus {
-    border-color:
-        rgba(255,105,180,.8);
-
-    box-shadow:
-        0 0 25px rgba(255,80,170,.18);
+    text-align: center;
+    font-size: 16px;
 }
 
 input::placeholder {
-    color:
-        rgba(255,255,255,.5);
+    color: rgba(255,255,255,.55);
+}
+
+input:focus {
+    border-color: #ff73b7;
+    box-shadow: 0 0 25px rgba(255,80,170,.18);
 }
 
 .error {
-    margin-top: 15px;
-
-    color:
-        #ff91c0;
-
-    text-shadow:
-        0 0 10px rgba(255,80,160,.5);
+    min-height: 20px;
+    margin-top: 14px;
+    color: #ff9bc7;
 }
 
-/* =========================================================
-   HEART
-========================================================= */
+/* ================================
+   BIG HEART
+================================ */
 
-.loading-heart,
-.final-heart {
-    position: relative;
-
-    font-size: 82px;
-
+.big-heart {
+    font-size: 85px;
     margin-bottom: 20px;
-
-    filter:
-        drop-shadow(
-            0 0 15px #ff4f9a
-        );
-
-    animation:
-        heartBeat 1.35s ease-in-out infinite;
+    animation: heartbeat 1.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(255,50,160,.8));
 }
 
-@keyframes heartBeat {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    15% {
-        transform: scale(1.16);
-    }
-
-    30% {
-        transform: scale(.98);
-    }
-
-    45% {
-        transform: scale(1.12);
-    }
-
-    65% {
-        transform: scale(1);
-    }
-}
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-#countdown {
-    margin-top: 10px;
-
-    font-size:
-        clamp(80px, 22vw, 170px);
-
-    font-weight: 800;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff6db2,
-            #ffd0e7,
-            #a66cff
-        );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    animation:
-        countdownPulse 1s infinite;
-
-    filter:
-        drop-shadow(
-            0 0 25px rgba(255,80,180,.35)
-        );
-}
-
-@keyframes countdownPulse {
-
-    0% {
+@keyframes heartbeat {
+    0%, 100% {
         transform: scale(1);
     }
 
     50% {
         transform: scale(1.16);
     }
+}
 
-    100% {
-        transform: scale(1);
+/* ================================
+   COUNTDOWN
+================================ */
+
+#countdown {
+    margin-top: 15px;
+
+    font-size: clamp(80px, 22vw, 160px);
+    font-weight: bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff67b4,
+            #c28aff,
+            #fff
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: countPulse 1s infinite;
+}
+
+@keyframes countPulse {
+    50% {
+        transform: scale(1.15);
     }
 }
 
-/* =========================================================
+/* ================================
    STORY
-========================================================= */
+================================ */
 
 .story-wrapper {
-    width: min(94vw, 1000px);
-
-    position: relative;
+    width: min(94vw, 950px);
 }
 
 .story-card {
     position: relative;
-
-    width: 100%;
-
-    padding: 12px;
+    overflow: hidden;
 
     border-radius: 32px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.13),
-            rgba(255,255,255,.035)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.22);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.65),
-        0 0 60px rgba(255,65,170,.12);
-
-    backdrop-filter: blur(18px);
-
-    -webkit-backdrop-filter: blur(18px);
-
-    overflow: hidden;
-}
-
-/* =========================================================
-   PHOTO FRAME
-========================================================= */
-
-.photo-frame {
-    position: relative;
-
-    padding: 8px;
-
-    border-radius: 25px;
+    padding: 10px;
 
     background:
         linear-gradient(
             135deg,
-            #ff74b8,
-            #ffd0e8,
-            #a16aff,
-            #ff5da7
+            #ff62b1,
+            #a76cff,
+            #ffcaea,
+            #6e55ff
         );
 
     background-size: 300% 300%;
+    animation: frameGradient 5s ease infinite;
 
-    animation:
-        frameGlow 6s ease infinite;
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.65),
+        0 0 45px rgba(255,60,180,.2);
 }
 
-@keyframes frameGlow {
-
+@keyframes frameGradient {
     0% {
         background-position: 0% 50%;
     }
@@ -725,420 +466,116 @@ input::placeholder {
 }
 
 .photo-inner {
-    position: relative;
-
     overflow: hidden;
-
-    border-radius: 18px;
-
-    background: #050207;
-
-    box-shadow:
-        inset 0 0 40px rgba(0,0,0,.8);
+    border-radius: 24px;
+    background: #050208;
+    position: relative;
 }
 
-.story-card img {
+.photo-inner::before {
+    content: "❤️";
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    z-index: 5;
+    font-size: 22px;
+    filter: drop-shadow(0 0 8px #ff5ca8);
+}
+
+.photo-inner::after {
+    content: "✨";
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    z-index: 5;
+    font-size: 22px;
+}
+
+#photo {
     display: block;
 
     width: 100%;
-
-    max-height: 66vh;
+    max-height: 68vh;
+    min-height: 280px;
 
     object-fit: contain;
 
-    background: #050207;
+    background: #020104;
 
-    animation:
-        photoZoom 6s linear;
+    animation: photoZoom 6s linear;
 }
 
 @keyframes photoZoom {
-
     from {
         transform: scale(1);
     }
 
     to {
-        transform: scale(1.075);
+        transform: scale(1.06);
     }
 }
 
-/* =========================================================
-   PHOTO LIGHTS
-========================================================= */
+.story-caption {
+    min-height: 105px;
 
-.photo-inner::before {
-    content: "";
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    position: absolute;
-    inset: 0;
+    padding: 24px 18px;
 
-    z-index: 2;
-
-    pointer-events: none;
+    font-size: clamp(17px, 3vw, 24px);
+    line-height: 1.6;
 
     background:
         linear-gradient(
-            120deg,
-            rgba(255,255,255,.15),
-            transparent 20%,
-            transparent 70%,
-            rgba(255,100,190,.10)
-        );
-}
-
-.photo-inner::after {
-    content: "✦";
-
-    position: absolute;
-
-    top: 15px;
-    right: 20px;
-
-    z-index: 4;
-
-    color: white;
-
-    font-size: 24px;
-
-    text-shadow:
-        0 0 10px white,
-        0 0 25px #ff7dc1;
-
-    animation:
-        sparkle 1.7s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-
-    0%,
-    100% {
-        opacity: .25;
-        transform: scale(.7) rotate(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.3) rotate(20deg);
-    }
-}
-
-/* =========================================================
-   PHOTO CORNER HEARTS
-========================================================= */
-
-.corner-heart {
-    position: absolute;
-
-    z-index: 8;
-
-    font-size: 25px;
-
-    filter:
-        drop-shadow(
-            0 0 8px rgba(255,80,170,.9)
+            rgba(16,4,22,.96),
+            rgba(16,4,22,.92)
         );
 
-    animation:
-        cornerFloat 2s ease-in-out infinite;
+    color: #ffe8f5;
+
+    text-shadow: 0 0 15px rgba(255,90,180,.25);
 }
 
-.corner-heart.one {
-    top: 5px;
-    left: 7px;
-}
-
-.corner-heart.two {
-    top: 5px;
-    right: 7px;
-
-    animation-delay: .5s;
-}
-
-.corner-heart.three {
-    bottom: 5px;
-    left: 7px;
-
-    animation-delay: 1s;
-}
-
-.corner-heart.four {
-    bottom: 5px;
-    right: 7px;
-
-    animation-delay: 1.5s;
-}
-
-@keyframes cornerFloat {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            translateY(-7px)
-            scale(1.15);
-    }
-}
-
-/* =========================================================
-   STORY CAPTION
-========================================================= */
-
-.story-caption {
-    min-height: 110px;
-
-    padding:
-        25px 18px 18px;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    font-size:
-        clamp(18px, 3vw, 26px);
-
-    line-height: 1.6;
-
-    color:
-        #ffe5f1;
-
-    text-shadow:
-        0 0 15px rgba(255,100,190,.35);
-
-    transition:
-        opacity .4s ease;
-}
-
-/* =========================================================
+/* ================================
    PROGRESS
-========================================================= */
+================================ */
 
 .progress {
-    width: 100%;
-    height: 5px;
-
-    overflow: hidden;
-
-    border-radius: 999px;
-
-    background:
-        rgba(255,255,255,.08);
+    height: 6px;
+    background: rgba(255,255,255,.1);
 }
 
 #bar {
-    width: 0%;
+    width: 0;
     height: 100%;
-
-    border-radius: inherit;
 
     background:
         linear-gradient(
             90deg,
-            #ff4e9b,
-            #ff9ac9,
-            #9f70ff
+            #ff55a8,
+            #c077ff,
+            #fff
         );
 
-    box-shadow:
-        0 0 15px rgba(255,80,170,.7);
+    box-shadow: 0 0 15px #ff63b3;
 
-    transition:
-        width .5s ease;
+    transition: width .4s ease;
 }
 
-/* =========================================================
-   REASONS / LETTER GLOW
-========================================================= */
-
-.love-list {
-    display: grid;
-
-    gap: 12px;
-
-    margin-top: 25px;
-}
-
-.love-item {
-    padding: 14px 18px;
-
-    border-radius: 18px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    border:
-        1px solid rgba(255,255,255,.09);
-
-    color:
-        rgba(255,235,245,.9);
-
-    box-shadow:
-        inset 0 0 15px rgba(255,255,255,.015);
-}
-
-/* =========================================================
-   FINAL SCREEN
-========================================================= */
+/* ================================
+   FINAL
+================================ */
 
 .final-message {
-    max-width: 550px;
-
-    margin: auto;
+    font-size: clamp(18px, 4vw, 24px);
+    color: #ffe1f1;
 }
 
-.final-glow {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 280px;
-    height: 280px;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,70,170,.15),
-            transparent 70%
-        );
-
-    filter: blur(20px);
-
-    pointer-events: none;
-}
-
-/* =========================================================
-   FLOATING HEARTS
-========================================================= */
-
-.floating-heart {
-    position: fixed;
-
-    bottom: -60px;
-
-    z-index: 30;
-
-    pointer-events: none;
-
-    font-size: 20px;
-
-    filter:
-        drop-shadow(
-            0 0 7px rgba(255,80,170,.8)
-        );
-
-    animation:
-        floatHeart var(--heart-time) linear forwards;
-}
-
-@keyframes floatHeart {
-
-    0% {
-        transform:
-            translateY(0)
-            translateX(0)
-            rotate(0deg)
-            scale(.7);
-
-        opacity: 0;
-    }
-
-    10% {
-        opacity: .85;
-    }
-
-    50% {
-        transform:
-            translateY(-55vh)
-            translateX(var(--heart-drift))
-            rotate(180deg)
-            scale(1);
-    }
-
-    100% {
-        transform:
-            translateY(-115vh)
-            translateX(calc(var(--heart-drift) * -1))
-            rotate(360deg)
-            scale(.75);
-
-        opacity: 0;
-    }
-}
-
-/* =========================================================
-   SPARKLES
-========================================================= */
-
-.sparkle {
-    position: fixed;
-
-    pointer-events: none;
-
-    z-index: 35;
-
-    color: white;
-
-    font-size: 15px;
-
-    text-shadow:
-        0 0 8px white,
-        0 0 18px #ff72ba;
-
-    animation:
-        sparkleOut 1.5s ease-out forwards;
-}
-
-@keyframes sparkleOut {
-
-    0% {
-        opacity: 0;
-        transform: scale(.2) rotate(0);
-    }
-
-    30% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            scale(1.5)
-            rotate(180deg)
-            translateY(-25px);
-    }
-}
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* =========================================================
+/* ================================
    MOBILE
-========================================================= */
+================================ */
 
 @media (max-width: 600px) {
 
@@ -1147,124 +584,75 @@ input::placeholder {
     }
 
     .card {
-        width: 96%;
-        padding: 32px 18px;
+        padding: 32px 19px;
         border-radius: 25px;
     }
 
     p {
         font-size: 15px;
-        line-height: 1.75;
-    }
-
-    .story-wrapper {
-        width: 97vw;
     }
 
     .story-card {
-        padding: 7px;
-        border-radius: 23px;
-    }
-
-    .photo-frame {
-        padding: 5px;
-        border-radius: 18px;
+        padding: 6px;
+        border-radius: 24px;
     }
 
     .photo-inner {
-        border-radius: 14px;
+        border-radius: 19px;
     }
 
-    .story-card img {
-        max-height: 58vh;
+    #photo {
+        min-height: 230px;
+        max-height: 62vh;
     }
 
     .story-caption {
-        min-height: 105px;
-        padding: 18px 10px;
+        min-height: 110px;
+        padding: 18px 12px;
         font-size: 17px;
-    }
-
-    .corner-heart {
-        font-size: 19px;
     }
 
     button,
     .surprise-button {
-        padding: 13px 23px;
-        font-size: 15px;
+        padding: 14px 24px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     EFFECT LAYERS
-========================================================= -->
-
+<!-- BACKGROUND LAYERS -->
 <div id="stars"></div>
-<div id="floatingWords"></div>
+<div id="floatingText"></div>
+<div id="hearts"></div>
+
+<!-- MUSIC -->
+<audio id="music" src="song.mp3" preload="auto"></audio>
 
 
-<!-- =========================================================
-     MUSIC
-========================================================= -->
+<!-- ================================
+     WELCOME
+================================ -->
 
-<audio
-    id="music"
-    src="song.mp3"
-    preload="auto">
-</audio>
-
-
-<!-- =========================================================
-     LOADING
-========================================================= -->
-
-<section id="loading" class="screen active">
+<section id="welcome" class="screen active">
 
     <div class="card">
 
-        <div class="loading-heart">
-            ❤️
-        </div>
+        <div class="big-heart">❤️</div>
 
         <h1>
-            Preparing Something Special...
+            Jyoti, I'm Sorry
         </h1>
 
         <p>
-            A little journey made especially
-            for Jyoti.
+            I made something small for you.
         </p>
 
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     WELCOME
-========================================================= -->
-
-<section id="welcome" class="screen">
-
-    <div class="card">
-
-        <div class="loading-heart">
-            💗
-        </div>
-
-        <h1>
-            Jyoti, I'm Sorry ❤️
-        </h1>
-
-        <p>
-            Before we begin, there is something
-            I want you to see.
+        <p style="margin-top:12px;">
+            Not to erase the past,
+            but to say what my heart
+            sometimes cannot explain.
         </p>
 
         <input
@@ -1275,31 +663,26 @@ input::placeholder {
 
         <br>
 
-        <button onclick="checkName()">
-            Enter My Heart ❤️
+        <button id="enterBtn">
+            Enter ❤️
         </button>
 
-        <div
-            id="nameError"
-            class="error">
-        </div>
+        <div id="nameError" class="error"></div>
 
     </div>
 
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      QUESTION 1
-========================================================= -->
+================================ -->
 
 <section id="question1" class="screen">
 
     <div class="card">
 
-        <div class="loading-heart">
-            🥺
-        </div>
+        <div class="big-heart">💗</div>
 
         <h1>
             Jyoti ❤️
@@ -1310,8 +693,8 @@ input::placeholder {
             made especially for you?
         </p>
 
-        <button onclick="nextQ1()">
-            Yes, show me ❤️
+        <button id="q1Btn">
+            Yes ❤️
         </button>
 
     </div>
@@ -1319,17 +702,15 @@ input::placeholder {
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      QUESTION 2
-========================================================= -->
+================================ -->
 
 <section id="question2" class="screen">
 
     <div class="card">
 
-        <div class="loading-heart">
-            💞
-        </div>
+        <div class="big-heart">💞</div>
 
         <h1>
             One More Question...
@@ -1340,7 +721,7 @@ input::placeholder {
             to tell you what is in my heart?
         </p>
 
-        <button onclick="nextQ2()">
+        <button id="q2Btn">
             Continue ❤️
         </button>
 
@@ -1349,13 +730,15 @@ input::placeholder {
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      COUNTDOWN
-========================================================= -->
+================================ -->
 
 <section id="truth" class="screen">
 
     <div class="card">
+
+        <div class="big-heart">💖</div>
 
         <h1>
             Something Is Waiting...
@@ -1365,42 +748,38 @@ input::placeholder {
             Take a breath.
         </p>
 
-        <div id="countdown">
-            3
-        </div>
+        <div id="countdown">3</div>
 
     </div>
 
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      INTRO
-========================================================= -->
+================================ -->
 
 <section id="intro" class="screen">
 
     <div class="card">
 
-        <div class="loading-heart">
-            🌹
-        </div>
+        <div class="big-heart">🌹</div>
 
         <h1>
             For Jyoti ❤️
         </h1>
 
         <p>
-            Some feelings are too important
-            to fit into one ordinary message.
+            Some feelings are too big
+            for one ordinary message.
         </p>
 
         <p style="margin-top:15px;">
             So I made this little journey
-            for you.
+            from my memories and my heart.
         </p>
 
-        <button onclick="startStory()">
+        <button id="startStoryBtn">
             Show Me ❤️
         </button>
 
@@ -1409,9 +788,9 @@ input::placeholder {
 </section>
 
 
-<!-- =========================================================
-     PHOTO STORY
-========================================================= -->
+<!-- ================================
+     STORY
+================================ -->
 
 <section id="story" class="screen">
 
@@ -1419,21 +798,12 @@ input::placeholder {
 
         <div class="story-card">
 
-            <div class="photo-frame">
+            <div class="photo-inner">
 
-                <div class="photo-inner">
-
-                    <span class="corner-heart one">💗</span>
-                    <span class="corner-heart two">✨</span>
-                    <span class="corner-heart three">✨</span>
-                    <span class="corner-heart four">💖</span>
-
-                    <img
-                        id="photo"
-                        src="photo1.jpg"
-                        alt="Our memory">
-
-                </div>
+                <img
+                    id="photo"
+                    src="photo1.jpg"
+                    alt="Our memory">
 
             </div>
 
@@ -1443,9 +813,7 @@ input::placeholder {
             </div>
 
             <div class="progress">
-
                 <div id="bar"></div>
-
             </div>
 
         </div>
@@ -1455,17 +823,15 @@ input::placeholder {
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      REASONS
-========================================================= -->
+================================ -->
 
 <section id="reasons" class="screen">
 
     <div class="card">
 
-        <div class="loading-heart">
-            💗
-        </div>
+        <div class="big-heart">❤️</div>
 
         <h1>
             Why You Matter
@@ -1478,31 +844,12 @@ input::placeholder {
             genuinely important to me.
         </p>
 
-        <div class="love-list">
+        <p style="margin-top:16px;">
+            I don't want to take those moments
+            for granted.
+        </p>
 
-            <div class="love-item">
-                ❤️ Thank you for the memories.
-            </div>
-
-            <div class="love-item">
-                ✨ Thank you for the little moments.
-            </div>
-
-            <div class="love-item">
-                🌙 Thank you for the conversations.
-            </div>
-
-            <div class="love-item">
-                🥺 I'm sorry for the moments I hurt you.
-            </div>
-
-            <div class="love-item">
-                💗 I promise to learn from my mistakes.
-            </div>
-
-        </div>
-
-        <button onclick="showPromise()">
+        <button id="promiseBtn">
             Continue ❤️
         </button>
 
@@ -1511,58 +858,41 @@ input::placeholder {
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      PROMISE
-========================================================= -->
+================================ -->
 
 <section id="promise" class="screen">
 
     <div class="card">
 
-        <div class="loading-heart">
-            🤍
-        </div>
+        <div class="big-heart">💗</div>
 
         <h1>
-            My Promises To You
+            My Promises
         </h1>
 
         <p>
-            I know that mistakes cannot simply
-            disappear because I say sorry.
+            I promise to listen better.
         </p>
 
-        <div class="love-list">
-
-            <div class="love-item">
-                🌹 I promise to listen better.
-            </div>
-
-            <div class="love-item">
-                💗 I promise to communicate better.
-            </div>
-
-            <div class="love-item">
-                🕊️ I promise to respect your boundaries.
-            </div>
-
-            <div class="love-item">
-                ✨ I promise to think before I speak.
-            </div>
-
-            <div class="love-item">
-                ❤️ I promise to learn instead of repeating
-                the same mistakes.
-            </div>
-
-        </div>
-
-        <p style="margin-top:22px;">
-            I don't want these to be empty words.
-            I want my actions to speak for them.
+        <p style="margin-top:10px;">
+            I promise to communicate instead
+            of letting misunderstandings grow.
         </p>
 
-        <button onclick="showLetter()">
+        <p style="margin-top:10px;">
+            I promise to respect your boundaries
+            and your feelings.
+        </p>
+
+        <p style="margin-top:10px;">
+            And most importantly, I promise
+            to let my actions speak louder
+            than my words.
+        </p>
+
+        <button id="letterBtn">
             Read My Letter 💌
         </button>
 
@@ -1571,17 +901,15 @@ input::placeholder {
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      LETTER
-========================================================= -->
+================================ -->
 
 <section id="letter" class="screen">
 
     <div class="card">
 
-        <div class="loading-heart">
-            💌
-        </div>
+        <div class="big-heart">💌</div>
 
         <h1>
             A Letter For Jyoti
@@ -1589,44 +917,32 @@ input::placeholder {
 
         <p>
             Jyoti, I know that saying sorry
-            cannot change the past.
+            cannot change what has already happened.
         </p>
 
         <p style="margin-top:15px;">
-            I know some moments may have hurt
-            more than I understood at the time.
+            I know some words and actions may
+            have hurt you more than I understood
+            at the time.
         </p>
 
         <p style="margin-top:15px;">
-            I'm not asking you to forget anything.
-            I'm only hoping that my actions from
-            now onward can show you that I
-            understood my mistakes.
-        </p>
-
-        <p style="margin-top:15px;">
-            I'm sorry for the things I did,
-            the things I said, and the moments
-            when I should have handled things
-            differently.
-        </p>
-
-        <p style="margin-top:15px;">
-            You deserved patience, understanding
-            and respect.
+            I'm not asking you to forget everything.
+            I'm only asking for the chance to show,
+            through my actions, that I have learned.
         </p>
 
         <p style="margin-top:15px;">
             Thank you for every conversation,
-            every memory and every little moment
-            that made this journey meaningful.
+            every memory, every laugh and
+            every little moment.
         </p>
 
         <p style="margin-top:15px;">
             I'm genuinely sorry, Jyoti. ❤️
         </p>
 
-        <button onclick="showForever()">
+        <button id="finalBtn">
             One Last Thing ❤️
         </button>
 
@@ -1635,56 +951,47 @@ input::placeholder {
 </section>
 
 
-<!-- =========================================================
+<!-- ================================
      FINAL
-========================================================= -->
+================================ -->
 
 <section id="forever" class="screen">
 
     <div class="card">
 
-        <div class="final-glow"></div>
+        <div class="big-heart">❤️</div>
 
-        <div class="final-message">
+        <h1>
+            Thank You, Jyoti
+        </h1>
 
-            <div class="final-heart">
-                ❤️
-            </div>
+        <p class="final-message">
+            Whatever happens next,
+            thank you for being part
+            of these memories.
+        </p>
 
-            <h1>
-                Thank You, Jyoti
-            </h1>
+        <p style="margin-top:18px;">
+            This little website has only one
+            intention — to say something that
+            was difficult to fit into an ordinary
+            message.
+        </p>
 
-            <p>
-                Whatever happens next, thank you
-                for being part of these memories.
-            </p>
+        <p style="margin-top:18px;">
+            I'm sorry.
+            I'm grateful.
+            And I truly hope my actions
+            can speak for me. ❤️
+        </p>
 
-            <p style="margin-top:15px;">
-                This little website was made with
-                one simple intention:
-            </p>
-
-            <p style="margin-top:15px;">
-                <strong>
-                    To say I'm sorry from my heart.
-                </strong>
-            </p>
-
-            <p style="margin-top:15px;">
-                I hope someday my actions can say
-                the things that words cannot.
-            </p>
-
-            <a
-                class="surprise-button"
-                href="https://digibouquet.vercel.app/bouquet/65238e66-3c43-4c02-898e-0b1b21138e37"
-                target="_blank"
-                rel="noopener noreferrer">
-                Open Your Surprise 🌹
-            </a>
-
-        </div>
+        <a
+            class="surprise-button"
+            href="https://digibouquet.vercel.app/bouquet/65238e66-3c43-4c02-898e-0b1b21138e37"
+            target="_blank"
+            rel="noopener noreferrer">
+            Open Your Surprise 🌹
+        </a>
 
     </div>
 
@@ -1692,141 +999,127 @@ input::placeholder {
 
 
 <script>
+"use strict";
 
-/* =========================================================
-   SCREEN SYSTEM
-========================================================= */
+/* =========================================
+   SAFE SCREEN SYSTEM
+========================================= */
 
 function showScreen(id) {
 
-    document
-        .querySelectorAll(".screen")
-        .forEach(screen => {
+    var screens = document.querySelectorAll(".screen");
 
-            screen.classList.remove("active");
-
-        });
-
-    const target =
-        document.getElementById(id);
-
-    if (target) {
-
-        target.classList.add("active");
-
+    for (var i = 0; i < screens.length; i++) {
+        screens[i].classList.remove("active");
     }
 
+    var target = document.getElementById(id);
+
+    if (target) {
+        target.classList.add("active");
+        window.scrollTo(0, 0);
+    }
 }
 
 
-/* =========================================================
-   LOADING
-========================================================= */
-
-setTimeout(() => {
-
-    showScreen("welcome");
-
-}, 3500);
-
-
-/* =========================================================
+/* =========================================
    NAME CHECK
-========================================================= */
+========================================= */
 
 function checkName() {
 
-    const input =
-        document.getElementById("nameInput");
+    var input = document.getElementById("nameInput");
+    var error = document.getElementById("nameError");
 
-    const name =
-        input.value
-            .toLowerCase()
-            .trim();
+    if (!input) return;
 
-    if (name.includes("jyoti")) {
+    var name = input.value.toLowerCase().trim();
+
+    if (name.indexOf("jyoti") !== -1) {
+
+        if (error) {
+            error.textContent = "";
+        }
 
         showScreen("question1");
 
-        burstSparkles();
-
     } else {
 
-        document
-            .getElementById("nameError")
-            .textContent =
-            "Hmm... try again ❤️";
+        if (error) {
+            error.textContent =
+                "Please enter Jyoti ❤️";
+        }
 
     }
-
 }
 
 
-/* =========================================================
-   QUESTIONS
-========================================================= */
-
-function nextQ1() {
-
-    showScreen("question2");
-
-    burstSparkles();
-
-}
-
-
-function nextQ2() {
-
-    showCountdown();
-
-}
-
-
-/* =========================================================
+/* =========================================
    COUNTDOWN
-========================================================= */
+========================================= */
 
-function showCountdown() {
+function startCountdown() {
 
     showScreen("truth");
 
-    let number = 3;
+    var number = 3;
+    var countdown = document.getElementById("countdown");
 
-    const countdown =
-        document.getElementById("countdown");
+    if (!countdown) return;
 
-    countdown.textContent =
-        number;
+    countdown.textContent = number;
 
-    const timer =
-        setInterval(() => {
+    var timer = setInterval(function () {
 
-            number--;
+        number--;
 
-            countdown.textContent =
-                number;
+        if (number > 0) {
+            countdown.textContent = number;
+        } else {
 
-            burstSparkles();
+            countdown.textContent = "❤️";
 
-            if (number <= 0) {
+            clearInterval(timer);
 
-                clearInterval(timer);
-
+            setTimeout(function () {
                 showScreen("intro");
+            }, 800);
+        }
 
-            }
-
-        }, 1000);
-
+    }, 1000);
 }
 
 
-/* =========================================================
+/* =========================================
+   MUSIC
+========================================= */
+
+function startMusic() {
+
+    var music = document.getElementById("music");
+
+    if (!music) return;
+
+    music.volume = 0.55;
+
+    var promise = music.play();
+
+    if (promise && promise.catch) {
+        promise.catch(function () {
+            /*
+             Browser blocked autoplay.
+             This is harmless.
+        */
+        });
+    }
+}
+
+
+/* =========================================
    PHOTOS
-========================================================= */
+========================================= */
 
-const photos = [
-
+var photos = [
     "photo1.jpg",
     "photo2.jpg",
     "photo3.jpg",
@@ -1842,293 +1135,430 @@ const photos = [
     "photo13.jpg",
     "photo14.jpg",
     "photo15.jpg"
-
 ];
 
+var messages = [
+    "Some people enter our life unexpectedly... ❤️",
 
-/* =========================================================
-   STORY MESSAGES
-========================================================= */
+    "And somehow become incredibly important. 💗",
 
-const messages = [
+    "Every conversation slowly became a memory. ✨",
 
-    "Some people enter our life unexpectedly...",
+    "Every little moment started meaning something. 💞",
 
-    "And somehow become incredibly important.",
-
-    "Every conversation slowly became a memory.",
-
-    "Every little moment started meaning something.",
-
-    "I know I have made mistakes.",
+    "I know I have made mistakes. 💔",
 
     "And I know some words and actions can hurt.",
 
-    "I'm truly sorry for those moments.",
-
     "I'm not asking you to forget the past.",
 
-    "I'm asking you to see that I am learning.",
+    "I'm asking you to see that I am learning. 🌱",
+
+    "I want to become a better version of myself.",
 
     "I promise to communicate better.",
 
-    "I promise to respect your feelings.",
+    "I promise to respect your feelings and boundaries.",
 
-    "I promise to be more careful with your heart.",
+    "I promise to let my actions speak.",
 
-    "Thank you for every beautiful memory.",
+    "Thank you for every beautiful memory. ❤️",
 
-    "Thank you for every little moment.",
+    "Thank you for every little moment. ✨",
 
-    "I'm sorry, Jyoti. ❤️"
-
+    "I'm genuinely sorry, Jyoti. ❤️"
 ];
 
-
-/* =========================================================
-   STORY VARIABLES
-========================================================= */
-
-let currentPhoto = 0;
-
-let slideTimer = null;
-
-const SLIDE_TIME = 6000;
+var currentPhoto = 0;
+var slideTimer = null;
+var SLIDE_TIME = 5500;
 
 
-/* =========================================================
+/* =========================================
    START STORY
-========================================================= */
+========================================= */
 
 function startStory() {
 
     currentPhoto = 0;
 
-    clearTimeout(slideTimer);
+    if (slideTimer) {
+        clearTimeout(slideTimer);
+        slideTimer = null;
+    }
 
     showScreen("story");
-
-    const music =
-        document.getElementById("music");
-
-    music.volume = .55;
-
-    music.play().catch(() => {
-
-        console.log(
-            "Browser blocked autoplay."
-        );
-
-    });
-
+    startMusic();
     showSlide();
-
-    burstSparkles();
-
 }
 
 
-/* =========================================================
+/* =========================================
    SHOW SLIDE
-========================================================= */
+========================================= */
 
 function showSlide() {
 
-    clearTimeout(slideTimer);
-
-    const photo =
-        document.getElementById("photo");
-
-    const text =
-        document.getElementById("storyText");
-
-    const bar =
-        document.getElementById("bar");
-
-
     if (currentPhoto >= photos.length) {
-
         finishStory();
-
         return;
-
     }
 
+    var photo = document.getElementById("photo");
+    var text = document.getElementById("storyText");
+    var bar = document.getElementById("bar");
 
-    /* Reset photo animation */
+    if (!photo || !text || !bar) {
+        return;
+    }
+
+    /* Restart image animation */
 
     photo.style.animation = "none";
 
+    /*
+       Force browser reflow safely.
+    */
     void photo.offsetWidth;
 
-    photo.style.animation =
-        "photoZoom 6s linear";
+    photo.style.animation = "photoZoom 6s linear";
 
+    /* Change photo */
 
-    /* Image */
+    photo.src = photos[currentPhoto];
 
-    photo.src =
-        photos[currentPhoto];
+    /* Change text */
 
-
-    /* Caption */
-
-    text.style.opacity = "0";
-
-    setTimeout(() => {
-
-        text.textContent =
-            messages[currentPhoto];
-
-        text.style.opacity = "1";
-
-    }, 250);
-
+    text.textContent = messages[currentPhoto];
 
     /* Progress */
 
-    const percent =
-        ((currentPhoto + 1) /
-        photos.length) * 100;
+    var percentage =
+        ((currentPhoto + 1) / photos.length) * 100;
 
-    bar.style.width =
-        percent + "%";
+    bar.style.width = percentage + "%";
 
+    /* Next slide */
 
-    /* Sparkles */
+    slideTimer = setTimeout(function () {
 
-    setTimeout(() => {
+        currentPhoto++;
 
-        burstSparkles();
+        showSlide();
 
-    }, 300);
-
-
-    /* Next */
-
-    slideTimer =
-        setTimeout(() => {
-
-            currentPhoto++;
-
-            showSlide();
-
-        }, SLIDE_TIME);
-
+    }, SLIDE_TIME);
 }
 
 
-/* =========================================================
+/* =========================================
    FINISH STORY
-========================================================= */
+========================================= */
 
 function finishStory() {
 
-    clearTimeout(slideTimer);
+    if (slideTimer) {
+        clearTimeout(slideTimer);
+        slideTimer = null;
+    }
 
-    document
-        .getElementById("bar")
-        .style.width = "100%";
+    var bar = document.getElementById("bar");
 
-    burstSparkles();
+    if (bar) {
+        bar.style.width = "100%";
+    }
 
-    setTimeout(() => {
-
+    setTimeout(function () {
         showScreen("reasons");
-
-    }, 1000);
-
+    }, 900);
 }
 
 
-/* =========================================================
-   OTHER SCREENS
-========================================================= */
+/* =========================================
+   STARS
+========================================= */
 
-function showPromise() {
+function createStars() {
 
-    showScreen("promise");
+    var container = document.getElementById("stars");
 
-    burstSparkles();
+    if (!container) return;
 
+    for (var i = 0; i < 90; i++) {
+
+        var star = document.createElement("div");
+
+        star.className = "star";
+
+        star.style.left =
+            Math.random() * 100 + "%";
+
+        star.style.top =
+            Math.random() * 100 + "%";
+
+        star.style.animationDuration =
+            (1.5 + Math.random() * 3) + "s";
+
+        star.style.animationDelay =
+            Math.random() * 3 + "s";
+
+        var size =
+            (1 + Math.random() * 3) + "px";
+
+        star.style.width = size;
+        star.style.height = size;
+
+        container.appendChild(star);
+    }
 }
 
 
-function showLetter() {
+/* =========================================
+   FLOATING APOLOGY TEXT
+========================================= */
 
-    showScreen("letter");
+var floatingMessages = [
+    "I'm Sorry ❤️",
+    "Forgive Me 💗",
+    "I Promise ✨",
+    "I Miss Your Smile 💕",
+    "You Matter To Me ❤️",
+    "I Will Do Better 🌸",
+    "Please Hear My Heart 💌",
+    "I'm Truly Sorry ❤️",
+    "Thank You For The Memories ✨",
+    "I Promise To Listen 💗",
+    "I Promise To Respect You 🌷",
+    "My Heart Says Sorry ❤️"
+];
 
-    burstSparkles();
+function createFloatingMessage() {
 
+    var container =
+        document.getElementById("floatingText");
+
+    if (!container) return;
+
+    var message =
+        document.createElement("div");
+
+    message.className = "float-message";
+
+    message.textContent =
+        floatingMessages[
+            Math.floor(
+                Math.random() * floatingMessages.length
+            )
+        ];
+
+    message.style.top =
+        (5 + Math.random() * 85) + "vh";
+
+    message.style.fontSize =
+        (13 + Math.random() * 12) + "px";
+
+    message.style.animationDuration =
+        (12 + Math.random() * 10) + "s";
+
+    container.appendChild(message);
+
+    setTimeout(function () {
+        message.remove();
+    }, 24000);
 }
 
 
-function showForever() {
+/* =========================================
+   FLOATING HEARTS
+========================================= */
 
-    showScreen("forever");
+function createHeart() {
 
-    burstSparkles();
+    var container =
+        document.getElementById("hearts");
 
-    for (let i = 0; i < 15; i++) {
+    if (!container) return;
 
-        setTimeout(
-            createHeart,
-            i * 180
+    var heart =
+        document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    var symbols = [
+        "❤️",
+        "💗",
+        "💖",
+        "💕",
+        "💞",
+        "✨"
+    ];
+
+    heart.textContent =
+        symbols[
+            Math.floor(
+                Math.random() * symbols.length
+            )
+        ];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (14 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration =
+        (6 + Math.random() * 7) + "s";
+
+    heart.style.setProperty(
+        "--drift",
+        (-80 + Math.random() * 160) + "px"
+    );
+
+    container.appendChild(heart);
+
+    setTimeout(function () {
+        heart.remove();
+    }, 15000);
+}
+
+
+/* =========================================
+   BUTTON EVENTS
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    createStars();
+
+    /* Initial floating effects */
+
+    setInterval(createHeart, 800);
+
+    setInterval(createFloatingMessage, 2500);
+
+    /* Initial messages */
+
+    for (var i = 0; i < 5; i++) {
+        setTimeout(createFloatingMessage, i * 500);
+    }
+
+    /* Name */
+
+    var enterBtn =
+        document.getElementById("enterBtn");
+
+    if (enterBtn) {
+        enterBtn.addEventListener(
+            "click",
+            checkName
+        );
+    }
+
+    var nameInput =
+        document.getElementById("nameInput");
+
+    if (nameInput) {
+
+        nameInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+                    checkName();
+                }
+
+            }
         );
 
     }
 
-}
+    /* Question 1 */
 
+    var q1 =
+        document.getElementById("q1Btn");
 
-/* =========================================================
-   STAR GENERATOR
-========================================================= */
+    if (q1) {
+        q1.addEventListener(
+            "click",
+            function () {
+                showScreen("question2");
+            }
+        );
+    }
 
-const starContainer =
-    document.getElementById("stars");
+    /* Question 2 */
 
-for (let i = 0; i < 130; i++) {
+    var q2 =
+        document.getElementById("q2Btn");
 
-    const star =
-        document.createElement("span");
+    if (q2) {
+        q2.addEventListener(
+            "click",
+            startCountdown
+        );
+    }
 
-    star.className =
-        "star";
+    /* Story */
 
-    if (Math.random() > .87) {
+    var start =
+        document.getElementById("startStoryBtn");
 
-        star.classList.add("big");
+    if (start) {
+        start.addEventListener(
+            "click",
+            startStory
+        );
+    }
+
+    /* Promise */
+
+    var promise =
+        document.getElementById("promiseBtn");
+
+    if (promise) {
+
+        promise.addEventListener(
+            "click",
+            function () {
+                showScreen("promise");
+            }
+        );
 
     }
 
-    star.style.left =
-        Math.random() * 100 + "%";
+    /* Letter */
 
-    star.style.top =
-        Math.random() * 100 + "%";
+    var letter =
+        document.getElementById("letterBtn");
 
-    star.style.setProperty(
-        "--duration",
-        (2 + Math.random() * 5) + "s"
-    );
+    if (letter) {
 
-    star.style.animationDelay =
-        (Math.random() * 5) + "s";
+        letter.addEventListener(
+            "click",
+            function () {
+                showScreen("letter");
+            }
+        );
 
-    starContainer.appendChild(star);
+    }
 
-}
+    /* Final */
 
+    var finalButton =
+        document.getElementById("finalBtn");
 
-/* =========================================================
-   FLOATING WORDS
-========================================================= */
+    if (finalButton) {
 
-const apologyWords = [
+        finalButton.addEventListener(
+            "click",
+            function () {
+                showScreen("forever");
+            }
+        );
 
-    "I'm Sorry ❤️",
-    "Forgive Me 💗",
-    "I Promise 🌹",
-    "Please Smile ✨",
-    "
+    }
+
+});
+</script>
+
+</body>
+</html>
