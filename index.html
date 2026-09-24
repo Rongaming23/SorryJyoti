@@ -3,14 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>For Jyoti ❤️</title>
+<title>For Manshi, My Sweetwifey ❤️</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 html,body{
     width:100%;
     min-height:100%;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -24,9 +32,13 @@ body{
         #08020d;
 }
 
-/* ---------- BACKGROUND ---------- */
+/* =========================
+   BACKGROUND
+========================= */
 
-#stars,#hearts,#floatWords{
+#stars,
+#hearts,
+#floatWords{
     position:fixed;
     inset:0;
     overflow:hidden;
@@ -43,32 +55,45 @@ body{
     height:3px;
     border-radius:50%;
     background:#fff;
-    box-shadow:0 0 10px #fff,0 0 20px #ff70bd;
-    animation:twinkle 2s infinite ease-in-out;
+    box-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff70bd;
+    animation:twinkle 3s infinite ease-in-out;
 }
 
 @keyframes twinkle{
-    0%,100%{opacity:.15;transform:scale(.5)}
-    50%{opacity:1;transform:scale(1.5)}
+    0%,100%{
+        opacity:.15;
+        transform:scale(.5);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.5);
+    }
 }
 
 .float-word{
     position:absolute;
     white-space:nowrap;
-    color:rgba(255,190,225,.16);
+    color:rgba(255,190,225,.14);
     font-weight:bold;
     text-shadow:0 0 15px rgba(255,80,180,.3);
     animation:floatText linear forwards;
+    will-change:transform,opacity;
 }
 
 @keyframes floatText{
     from{
-        transform:translateX(110vw) rotate(-4deg);
+        transform:translate3d(110vw,0,0) rotate(-4deg);
         opacity:0;
     }
-    10%,90%{opacity:1}
+
+    12%,88%{
+        opacity:1;
+    }
+
     to{
-        transform:translateX(-130vw) rotate(4deg);
+        transform:translate3d(-130vw,0,0) rotate(4deg);
         opacity:0;
     }
 }
@@ -78,24 +103,38 @@ body{
     bottom:-60px;
     animation:rise linear forwards;
     filter:drop-shadow(0 0 8px #ff55a8);
+    will-change:transform,opacity;
 }
 
 @keyframes rise{
     0%{
-        transform:translateY(0) rotate(0);
+        transform:translate3d(0,0,0) rotate(0deg) scale(.8);
         opacity:0;
     }
-    10%{opacity:.9}
+
+    10%{
+        opacity:.9;
+    }
+
+    50%{
+        transform:
+            translate3d(var(--x),-55vh,0)
+            rotate(180deg)
+            scale(1);
+    }
+
     100%{
         transform:
-            translateY(-115vh)
-            translateX(var(--x))
-            rotate(360deg);
+            translate3d(var(--x),-115vh,0)
+            rotate(360deg)
+            scale(.7);
         opacity:0;
     }
 }
 
-/* ---------- SCREEN ---------- */
+/* =========================
+   SCREENS
+========================= */
 
 .screen{
     display:none;
@@ -111,42 +150,88 @@ body{
 
 .screen.active{
     display:flex;
-    animation:screenIn .7s ease both;
+    animation:screenIn .9s cubic-bezier(.16,1,.3,1) both;
 }
 
 @keyframes screenIn{
-    from{opacity:0;transform:scale(.97) translateY(15px)}
-    to{opacity:1;transform:scale(1) translateY(0)}
+    0%{
+        opacity:0;
+        transform:translateY(25px) scale(.97);
+        filter:blur(6px);
+    }
+
+    60%{
+        opacity:1;
+        filter:blur(0);
+    }
+
+    100%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+        filter:blur(0);
+    }
 }
 
-/* ---------- CARD ---------- */
+/* =========================
+   CARD
+========================= */
 
 .card{
     width:min(92vw,700px);
     padding:42px 28px;
     border-radius:30px;
+
     background:rgba(255,255,255,.08);
+
     border:1px solid rgba(255,255,255,.17);
+
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
+
     box-shadow:
         0 30px 100px rgba(0,0,0,.55),
         inset 0 0 40px rgba(255,255,255,.025);
+
+    animation:cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
 }
 
 h1{
     margin-bottom:20px;
     font-size:clamp(32px,8vw,58px);
     line-height:1.12;
-    background:linear-gradient(120deg,#fff,#ffacd5,#c18aff,#fff);
+
+    background:
+        linear-gradient(
+            120deg,
+            #fff,
+            #ffacd5,
+            #c18aff,
+            #fff
+        );
+
     background-size:250% auto;
+
     -webkit-background-clip:text;
+    background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:shine 5s linear infinite;
+
+    animation:shine 6s linear infinite;
 }
 
 @keyframes shine{
-    to{background-position:250% center}
+    to{
+        background-position:250% center;
+    }
 }
 
 p{
@@ -155,41 +240,91 @@ p{
     color:rgba(255,255,255,.88);
 }
 
-button,.surprise{
+button,
+.surprise{
     display:inline-block;
     margin-top:25px;
     padding:15px 30px;
+
     border:0;
     border-radius:999px;
+
     color:white;
-    background:linear-gradient(135deg,#ff4fa4,#9d68ff);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4fa4,
+            #9d68ff
+        );
+
     font-weight:bold;
     font-size:16px;
+
     cursor:pointer;
     text-decoration:none;
-    box-shadow:0 12px 35px rgba(255,60,170,.3);
-    transition:.25s;
+
+    box-shadow:
+        0 12px 35px rgba(255,60,170,.3);
+
+    transition:
+        transform .35s cubic-bezier(.16,1,.3,1),
+        box-shadow .35s ease,
+        filter .35s ease;
 }
 
-button:hover,.surprise:hover{
-    transform:translateY(-4px) scale(1.03);
-    box-shadow:0 18px 50px rgba(255,60,170,.5);
+button:hover,
+.surprise:hover{
+    transform:translateY(-5px) scale(1.04);
+
+    box-shadow:
+        0 18px 50px rgba(255,60,170,.5);
+
+    filter:brightness(1.1);
+}
+
+button:active,
+.surprise:active{
+    transform:scale(.97);
 }
 
 input{
     width:min(90%,400px);
+
     margin-top:18px;
+
     padding:16px 20px;
+
     border:1px solid rgba(255,255,255,.2);
     border-radius:999px;
+
     outline:none;
+
     background:rgba(255,255,255,.08);
+
     color:white;
+
     text-align:center;
     font-size:16px;
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
 }
 
-input::placeholder{color:rgba(255,255,255,.5)}
+input:focus{
+    border-color:rgba(255,120,190,.7);
+
+    background:rgba(255,255,255,.12);
+
+    box-shadow:
+        0 0 25px rgba(255,80,170,.18);
+}
+
+input::placeholder{
+    color:rgba(255,255,255,.5);
+}
 
 .error{
     min-height:20px;
@@ -200,31 +335,60 @@ input::placeholder{color:rgba(255,255,255,.5)}
 .big-heart{
     margin-bottom:15px;
     font-size:80px;
-    animation:beat 1.4s infinite;
-    filter:drop-shadow(0 0 25px #ff45a4);
+
+    animation:
+        beat 1.5s infinite ease-in-out;
+
+    filter:
+        drop-shadow(0 0 25px #ff45a4);
 }
 
 @keyframes beat{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.15)}
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.13);
+    }
 }
 
-/* ---------- COUNTDOWN ---------- */
+/* =========================
+   COUNTDOWN
+========================= */
 
 #countdown{
     font-size:clamp(80px,22vw,160px);
     font-weight:bold;
-    background:linear-gradient(135deg,#ff67b4,#bd83ff,#fff);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff67b4,
+            #bd83ff,
+            #fff
+        );
+
     -webkit-background-clip:text;
+    background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:countBeat 1s infinite;
+
+    animation:countBeat 1s infinite ease-in-out;
 }
 
 @keyframes countBeat{
-    50%{transform:scale(1.15)}
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
 }
 
-/* ---------- PHOTO STORY ---------- */
+/* =========================
+   PHOTO STORY
+========================= */
 
 .story-wrap{
     width:min(94vw,950px);
@@ -233,207 +397,339 @@ input::placeholder{color:rgba(255,255,255,.5)}
 .photo-frame{
     padding:8px;
     border-radius:30px;
-    background:linear-gradient(
-        135deg,
-        #ff52aa,
-        #a46cff,
-        #ffd0e9,
-        #7355ff
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff52aa,
+            #a46cff,
+            #ffd0e9,
+            #7355ff
+        );
+
     background-size:300% 300%;
-    animation:borderMove 5s infinite;
+
+    animation:borderMove 7s ease-in-out infinite;
+
     box-shadow:
         0 30px 100px rgba(0,0,0,.7),
         0 0 50px rgba(255,70,180,.25);
 }
 
 @keyframes borderMove{
-    0%{background-position:0 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0 50%}
+    0%{
+        background-position:0 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0 50%;
+    }
 }
 
 .photo-stage{
     position:relative;
+
     height:min(68vh,700px);
+
     overflow:hidden;
+
     border-radius:23px;
+
     background:#020104;
+
     perspective:1400px;
 }
 
 .story-photo{
     position:absolute;
+
     inset:0;
+
     width:100%;
     height:100%;
+
     object-fit:contain;
+
     background:#020104;
+
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
+
+    will-change:
+        transform,
+        opacity,
+        filter;
 }
 
-.old-photo{z-index:1}
-.new-photo{z-index:2}
+.old-photo{
+    z-index:1;
+}
+
+.new-photo{
+    z-index:2;
+}
 
 .photo-glow{
     position:absolute;
+
     z-index:0;
+
     inset:15%;
-    background:radial-gradient(circle,#ff52b0,transparent 65%);
+
+    background:
+        radial-gradient(
+            circle,
+            #ff52b0,
+            transparent 65%
+        );
+
     filter:blur(50px);
+
     opacity:.3;
+
+    animation:glowPulse 4s infinite ease-in-out;
 }
+
+@keyframes glowPulse{
+    0%,100%{
+        opacity:.2;
+        transform:scale(.9);
+    }
+
+    50%{
+        opacity:.4;
+        transform:scale(1.1);
+    }
+}
+
+/* Smooth photo entrance */
 
 .enter-flip{
-    animation:flipIn 1.3s cubic-bezier(.16,1,.3,1) forwards;
+    animation:
+        smoothFlip 1.45s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
 }
 
-@keyframes flipIn{
+@keyframes smoothFlip{
     0%{
         opacity:0;
+
         transform:
-            translateX(80%)
-            rotateY(-75deg)
-            rotateZ(-8deg)
-            scale(.7);
-        filter:blur(15px) brightness(1.5);
-        clip-path:polygon(100% 0,100% 100%,20% 90%,0 50%,20% 10%);
+            translate3d(80%,0,0)
+            rotateY(-70deg)
+            rotateZ(-5deg)
+            scale(.8);
+
+        filter:
+            blur(12px)
+            brightness(1.5);
     }
-    35%{
+
+    45%{
         opacity:.8;
+
         transform:
-            translateX(30%)
-            rotateY(-30deg)
-            rotateZ(5deg)
-            scale(.9);
-        filter:blur(6px);
+            translate3d(20%,0,0)
+            rotateY(-18deg)
+            rotateZ(2deg)
+            scale(.96);
+
+        filter:blur(3px);
     }
-    65%{
+
+    75%{
         transform:
-            translateX(-3%)
-            rotateY(8deg)
-            rotateZ(-2deg)
-            scale(1.03);
-        filter:blur(1px);
+            translate3d(-2%,0,0)
+            rotateY(3deg)
+            rotateZ(-1deg)
+            scale(1.02);
     }
+
     100%{
         opacity:1;
         transform:none;
         filter:none;
-        clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
     }
 }
 
 .enter-wave{
-    animation:waveIn 1.3s cubic-bezier(.22,1,.36,1) forwards;
+    animation:
+        smoothWave 1.45s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
 }
 
-@keyframes waveIn{
+@keyframes smoothWave{
     0%{
         opacity:0;
+
         transform:
-            translateY(70px)
-            scale(1.25)
-            rotate(-7deg);
-        filter:blur(15px);
-        clip-path:polygon(
-            0 15%,20% 3%,40% 18%,60% 2%,
-            80% 17%,100% 5%,100% 100%,0 100%
-        );
+            translate3d(0,60px,0)
+            scale(1.15)
+            rotate(-4deg);
+
+        filter:blur(12px);
     }
-    35%{
+
+    40%{
         opacity:1;
+
         transform:
-            translateY(-18px)
-            scale(1.08)
-            rotate(4deg);
-        filter:blur(4px);
-        clip-path:polygon(
-            0 5%,20% 20%,40% 2%,60% 18%,
-            80% 3%,100% 15%,100% 100%,0 100%
-        );
+            translate3d(0,-12px,0)
+            scale(1.04)
+            rotate(2deg);
+
+        filter:blur(3px);
     }
+
     70%{
-        transform:scale(1.02) rotate(-2deg);
-        filter:none;
+        transform:
+            translate3d(0,3px,0)
+            scale(1.01)
+            rotate(-1deg);
     }
+
     100%{
         transform:none;
-        clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+        filter:none;
     }
 }
 
 .exit-photo{
-    animation:flipOut 1.15s ease forwards;
+    animation:
+        smoothExit 1.15s
+        cubic-bezier(.7,0,.84,0)
+        forwards;
 }
 
-@keyframes flipOut{
+@keyframes smoothExit{
     0%{
         opacity:1;
         transform:none;
+        filter:none;
     }
+
     100%{
         opacity:0;
+
         transform:
-            translateX(-100%)
-            rotateY(80deg)
-            rotateZ(-10deg)
-            scale(.7);
-        filter:blur(15px);
+            translate3d(-100%,0,0)
+            rotateY(65deg)
+            rotateZ(-7deg)
+            scale(.8);
+
+        filter:blur(12px);
     }
 }
 
 .light-sweep{
     position:absolute;
+
     z-index:5;
+
     top:-30%;
     left:-70%;
+
     width:35%;
     height:160%;
+
     pointer-events:none;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.4),
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
     transform:rotate(15deg);
-    animation:sweep 2s ease-out;
+
+    animation:
+        sweep 2.2s
+        cubic-bezier(.16,1,.3,1);
 }
 
 @keyframes sweep{
-    from{left:-70%}
-    to{left:140%}
+    from{
+        left:-70%;
+    }
+
+    to{
+        left:140%;
+    }
 }
 
 .spark{
     position:absolute;
+
     z-index:6;
+
     color:white;
-    text-shadow:0 0 10px #fff,0 0 25px #ff58ac;
-    animation:spark 2s infinite;
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 25px #ff58ac;
+
+    animation:
+        spark 3s infinite ease-in-out;
 }
 
-.s1{top:10%;left:8%}
-.s2{top:20%;right:8%;animation-delay:.5s}
-.s3{bottom:18%;left:12%;animation-delay:1s}
+.s1{
+    top:10%;
+    left:8%;
+}
+
+.s2{
+    top:20%;
+    right:8%;
+    animation-delay:.7s;
+}
+
+.s3{
+    bottom:18%;
+    left:12%;
+    animation-delay:1.4s;
+}
 
 @keyframes spark{
-    0%,100%{opacity:.2;transform:scale(.6)}
-    50%{opacity:1;transform:scale(1.5) rotate(180deg)}
+    0%,100%{
+        opacity:.2;
+        transform:scale(.6) rotate(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.5) rotate(180deg);
+    }
 }
 
 .caption{
     min-height:110px;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
+
     padding:20px;
+
     background:rgba(10,2,15,.95);
+
     font-size:clamp(17px,3vw,24px);
+
     line-height:1.6;
+
     color:#ffe3f2;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
 }
 
 .progress{
@@ -444,106 +740,200 @@ input::placeholder{color:rgba(255,255,255,.5)}
 #bar{
     width:0;
     height:100%;
-    background:linear-gradient(90deg,#ff55a8,#b77aff,#fff);
-    box-shadow:0 0 15px #ff55a8;
-    transition:.4s;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff55a8,
+            #b77aff,
+            #fff
+        );
+
+    box-shadow:
+        0 0 15px #ff55a8;
+
+    transition:
+        width .8s cubic-bezier(.16,1,.3,1);
 }
 
-/* ---------- LETTER ---------- */
+/* =========================
+   LETTER
+========================= */
 
 .letter{
     width:min(94vw,780px);
+
     padding:45px 28px;
+
     border-radius:30px;
+
     background:
         linear-gradient(
             145deg,
             rgba(255,255,255,.13),
             rgba(255,255,255,.045)
         );
+
     border:1px solid rgba(255,255,255,.18);
+
     backdrop-filter:blur(22px);
-    box-shadow:0 30px 100px rgba(0,0,0,.55);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.55);
 }
 
 .letter .rose{
     font-size:65px;
-    animation:rose 3s infinite ease-in-out;
+
+    animation:
+        rose 3s infinite ease-in-out;
 }
 
 @keyframes rose{
-    50%{transform:translateY(-8px) rotate(3deg)}
+    0%,100%{
+        transform:translateY(0) rotate(0);
+    }
+
+    50%{
+        transform:translateY(-8px) rotate(3deg);
+    }
 }
 
 .letter-small{
     color:#ffafd5;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     font-size:12px;
+
     margin:10px;
 }
 
 .line{
     width:100px;
     height:2px;
+
     margin:0 auto 30px;
-    background:linear-gradient(90deg,transparent,#ff65b0,#bf82ff,transparent);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff65b0,
+            #bf82ff,
+            transparent
+        );
 }
 
 .letter p{
     max-width:650px;
+
     margin:0 auto 18px;
+
     line-height:1.9;
 }
 
 .sorry-box{
     margin:30px auto;
+
     max-width:600px;
+
     padding:25px;
+
     border-radius:20px;
-    background:linear-gradient(
-        135deg,
-        rgba(255,70,170,.13),
-        rgba(150,80,255,.13)
-    );
-    border:1px solid rgba(255,140,205,.22);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,70,170,.13),
+            rgba(150,80,255,.13)
+        );
+
+    border:
+        1px solid
+        rgba(255,140,205,.22);
+
     color:#ffd9eb;
-    font:italic 24px Georgia,serif;
+
+    font:
+        italic 24px Georgia,serif;
+
+    box-shadow:
+        0 10px 35px rgba(255,50,160,.08);
 }
 
 .promise-title{
     margin:35px 0 18px;
+
     color:#ffacd3;
-    font:24px Georgia,serif;
+
+    font:
+        24px Georgia,serif;
 }
 
 .promise-list{
     display:grid;
+
     gap:12px;
+
     max-width:650px;
+
     margin:auto;
 }
 
 .promise{
     display:flex;
+
     gap:15px;
+
     align-items:center;
+
     text-align:left;
+
     padding:17px;
+
     border-radius:18px;
+
     background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.1);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease;
+}
+
+.promise:hover{
+    transform:translateY(-3px);
+
+    background:rgba(255,255,255,.08);
+
+    border-color:
+        rgba(255,120,190,.25);
 }
 
 .promise-icon{
     flex:0 0 45px;
+
     width:45px;
     height:45px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     border-radius:50%;
-    background:rgba(255,80,170,.12);
+
+    background:
+        rgba(255,80,170,.12);
+
     font-size:22px;
 }
 
@@ -560,29 +950,50 @@ input::placeholder{color:rgba(255,255,255,.5)}
 
 .note{
     margin:30px auto;
+
     padding:25px;
+
     max-width:620px;
+
     border-radius:20px;
+
     background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 }
 
 .note-heart{
     font-size:45px;
-    animation:beat 1.4s infinite;
+
+    animation:
+        beat 1.4s infinite ease-in-out;
 }
 
 .signature{
     margin-top:25px;
+
     color:#ff9dca;
-    font:italic 21px Georgia,serif;
+
+    font:
+        italic 21px Georgia,serif;
 }
 
-/* ---------- MOBILE ---------- */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
-    .card,.letter{
+
+    .screen{
+        padding:14px;
+    }
+
+    .card,
+    .letter{
         padding:32px 18px;
+        border-radius:25px;
     }
 
     .photo-stage{
@@ -597,6 +1008,31 @@ input::placeholder{color:rgba(255,255,255,.5)}
     .promise{
         align-items:flex-start;
     }
+
+    .big-heart{
+        font-size:65px;
+    }
+
+    button,
+    .surprise{
+        padding:14px 25px;
+    }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
 }
 </style>
 </head>
@@ -609,14 +1045,16 @@ input::placeholder{color:rgba(255,255,255,.5)}
 
 <audio id="music" src="song.mp3" preload="auto"></audio>
 
+
 <!-- WELCOME -->
 
 <section id="welcome" class="screen active">
+
 <div class="card">
 
     <div class="big-heart">❤️</div>
 
-    <h1>Jyoti, I'm Sorry</h1>
+    <h1>Manshi, My Sweetwifey ❤️</h1>
 
     <p>
         I made something special for you.
@@ -627,7 +1065,10 @@ input::placeholder{color:rgba(255,255,255,.5)}
         but to tell you what is in my heart.
     </p>
 
-    <input id="name" placeholder="Enter your name">
+    <input
+        id="name"
+        placeholder="Enter your name"
+        autocomplete="off">
 
     <br>
 
@@ -638,30 +1079,38 @@ input::placeholder{color:rgba(255,255,255,.5)}
     <div id="error" class="error"></div>
 
 </div>
+
 </section>
+
 
 <!-- QUESTION 1 -->
 
 <section id="q1" class="screen">
+
 <div class="card">
 
     <div class="big-heart">💗</div>
 
-    <h1>Jyoti ❤️</h1>
+    <h1>Manshi ❤️</h1>
 
     <p>
         Are you ready to see something
         made especially for you?
     </p>
 
-    <button id="goQ2">Yes ❤️</button>
+    <button id="goQ2">
+        Yes ❤️
+    </button>
 
 </div>
+
 </section>
+
 
 <!-- QUESTION 2 -->
 
 <section id="q2" class="screen">
+
 <div class="card">
 
     <div class="big-heart">💞</div>
@@ -678,11 +1127,14 @@ input::placeholder{color:rgba(255,255,255,.5)}
     </button>
 
 </div>
+
 </section>
+
 
 <!-- COUNTDOWN -->
 
 <section id="count" class="screen">
+
 <div class="card">
 
     <div class="big-heart">💖</div>
@@ -694,16 +1146,19 @@ input::placeholder{color:rgba(255,255,255,.5)}
     <div id="countdown">3</div>
 
 </div>
+
 </section>
+
 
 <!-- INTRO -->
 
 <section id="intro" class="screen">
+
 <div class="card">
 
     <div class="big-heart">🌹</div>
 
-    <h1>For Jyoti ❤️</h1>
+    <h1>For Manshi ❤️</h1>
 
     <p>
         Some feelings are difficult
@@ -719,11 +1174,14 @@ input::placeholder{color:rgba(255,255,255,.5)}
     </button>
 
 </div>
+
 </section>
 
-<!-- STORY -->
+
+<!-- PHOTO STORY -->
 
 <section id="story" class="screen">
+
 <div class="story-wrap">
 
     <div class="photo-frame">
@@ -732,13 +1190,17 @@ input::placeholder{color:rgba(255,255,255,.5)}
 
             <div class="photo-glow"></div>
 
-            <img id="oldPhoto"
-                 class="story-photo old-photo"
-                 src="photo1.jpg">
+            <img
+                id="oldPhoto"
+                class="story-photo old-photo"
+                src="photo1.jpg"
+                alt="Memory">
 
-            <img id="photo"
-                 class="story-photo new-photo"
-                 src="photo1.jpg">
+            <img
+                id="photo"
+                class="story-photo new-photo"
+                src="photo1.jpg"
+                alt="Memory">
 
             <div class="light-sweep"></div>
 
@@ -757,11 +1219,14 @@ input::placeholder{color:rgba(255,255,255,.5)}
     </div>
 
 </div>
+
 </section>
+
 
 <!-- REASONS -->
 
 <section id="reasons" class="screen">
+
 <div class="card">
 
     <div class="big-heart">❤️</div>
@@ -785,11 +1250,14 @@ input::placeholder{color:rgba(255,255,255,.5)}
     </button>
 
 </div>
+
 </section>
+
 
 <!-- PROMISE -->
 
 <section id="promiseScreen" class="screen">
+
 <div class="card">
 
     <div class="big-heart">💗</div>
@@ -819,11 +1287,14 @@ input::placeholder{color:rgba(255,255,255,.5)}
     </button>
 
 </div>
+
 </section>
+
 
 <!-- LETTER -->
 
 <section id="letterScreen" class="screen">
+
 <div class="letter">
 
     <div class="rose">🌹</div>
@@ -832,7 +1303,7 @@ input::placeholder{color:rgba(255,255,255,.5)}
         A little note from my heart
     </div>
 
-    <h1>Dear Jyoti ❤️</h1>
+    <h1>Dear Manshi, My Sweetwifey ❤️</h1>
 
     <div class="line"></div>
 
@@ -873,50 +1344,70 @@ input::placeholder{color:rgba(255,255,255,.5)}
     <div class="promise-list">
 
         <div class="promise">
+
             <div class="promise-icon">💗</div>
+
             <div>
                 <h3>I will listen.</h3>
+
                 <p>
                     Not just hear your words,
                     but try to understand your feelings.
                 </p>
             </div>
+
         </div>
 
+
         <div class="promise">
+
             <div class="promise-icon">🌸</div>
+
             <div>
                 <h3>I will respect you.</h3>
+
                 <p>
                     Your feelings, your space,
                     your choices and your boundaries.
                 </p>
             </div>
+
         </div>
 
+
         <div class="promise">
+
             <div class="promise-icon">✨</div>
+
             <div>
                 <h3>I will communicate.</h3>
+
                 <p>
                     I will choose honest conversation
                     instead of silence or assumptions.
                 </p>
             </div>
+
         </div>
 
+
         <div class="promise">
+
             <div class="promise-icon">❤️</div>
+
             <div>
                 <h3>I will show it.</h3>
+
                 <p>
                     Because real change is something
                     you show through your actions.
                 </p>
             </div>
+
         </div>
 
     </div>
+
 
     <div class="note">
 
@@ -937,6 +1428,7 @@ input::placeholder{color:rgba(255,255,255,.5)}
 
     </div>
 
+
     <p>
         Thank you for every conversation,
         every laugh, every little memory
@@ -955,12 +1447,13 @@ input::placeholder{color:rgba(255,255,255,.5)}
         all I can do is make tomorrow better.
     </p>
 
+
     <div class="note">
 
         <div class="big-heart">❤️</div>
 
         <p>
-            I'm sorry, Jyoti.
+            I'm sorry, Manshi.
         </p>
 
         <p style="margin-top:10px">
@@ -974,6 +1467,7 @@ input::placeholder{color:rgba(255,255,255,.5)}
 
     </div>
 
+
     <div class="signature">
         With a sincere heart,<br>
         Someone who truly cares ❤️
@@ -984,16 +1478,19 @@ input::placeholder{color:rgba(255,255,255,.5)}
     </button>
 
 </div>
+
 </section>
+
 
 <!-- FINAL -->
 
 <section id="final" class="screen">
+
 <div class="card">
 
     <div class="big-heart">❤️</div>
 
-    <h1>Thank You, Jyoti</h1>
+    <h1>Thank You, Manshi</h1>
 
     <p>
         Whatever happens next,
@@ -1017,23 +1514,26 @@ input::placeholder{color:rgba(255,255,255,.5)}
 
     <a
         class="surprise"
-        href="https://digibouquet.vercel.app/bouquet/65238e66-3c43-4c02-898e-0b1b21138e37"
+        href="https://digibouquet.vercel.app/bouquet/e2ea5577-cb56-4ec6-940d-a8987ab3d940"
         target="_blank"
-        rel="noopener">
+        rel="noopener noreferrer">
         Open Your Surprise 🌹
     </a>
 
 </div>
+
 </section>
+
 
 <script>
 "use strict";
 
-/* ================================
-   SCREEN
-================================ */
+/* =========================
+   SCREEN NAVIGATION
+========================= */
 
 function show(id){
+
     var all=document.querySelectorAll(".screen");
 
     for(var i=0;i<all.length;i++){
@@ -1044,20 +1544,24 @@ function show(id){
 
     if(target){
         target.classList.add("active");
-        window.scrollTo(0,0);
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
     }
 }
 
 
-/* ================================
-   BACKGROUND
-================================ */
+/* =========================
+   STARS
+========================= */
 
 function makeStars(){
 
     var box=document.getElementById("stars");
 
-    for(var i=0;i<80;i++){
+    for(var i=0;i<90;i++){
 
         var s=document.createElement("div");
 
@@ -1067,27 +1571,38 @@ function makeStars(){
         s.style.top=Math.random()*100+"%";
 
         s.style.animationDelay=
-            Math.random()*3+"s";
+            Math.random()*4+"s";
 
         s.style.animationDuration=
-            (1.5+Math.random()*3)+"s";
+            (2+Math.random()*3)+"s";
+
+        var size=
+            1.5+Math.random()*2.5;
+
+        s.style.width=size+"px";
+        s.style.height=size+"px";
 
         box.appendChild(s);
     }
 }
 
 
+/* =========================
+   FLOATING WORDS
+========================= */
+
 var words=[
     "I'm Sorry ❤️",
-    "Forgive Me 💗",
+    "My Sweetwifey 💗",
     "I Promise ✨",
     "You Matter To Me ❤️",
     "I Will Do Better 🌸",
     "Please Hear My Heart 💌",
     "I'm Truly Sorry ❤️",
-    "Thank You For The Memories ✨"
+    "Thank You For The Memories ✨",
+    "Manshi ❤️",
+    "Forever Special 💕"
 ];
-
 
 function makeWord(){
 
@@ -1098,7 +1613,11 @@ function makeWord(){
     x.className="float-word";
 
     x.textContent=
-        words[Math.floor(Math.random()*words.length)];
+        words[
+            Math.floor(
+                Math.random()*words.length
+            )
+        ];
 
     x.style.top=
         (5+Math.random()*85)+"vh";
@@ -1107,15 +1626,19 @@ function makeWord(){
         (13+Math.random()*10)+"px";
 
     x.style.animationDuration=
-        (12+Math.random()*9)+"s";
+        (14+Math.random()*9)+"s";
 
     box.appendChild(x);
 
     setTimeout(function(){
         x.remove();
-    },23000);
+    },25000);
 }
 
+
+/* =========================
+   FLOATING HEARTS
+========================= */
 
 function makeHeart(){
 
@@ -1125,61 +1648,94 @@ function makeHeart(){
 
     h.className="heart";
 
-    var list=["❤️","💗","💖","💕","💞","✨"];
+    var list=[
+        "❤️",
+        "💗",
+        "💖",
+        "💕",
+        "💞",
+        "✨"
+    ];
 
     h.textContent=
-        list[Math.floor(Math.random()*list.length)];
+        list[
+            Math.floor(
+                Math.random()*list.length
+            )
+        ];
 
-    h.style.left=Math.random()*100+"vw";
+    h.style.left=
+        Math.random()*100+"vw";
 
     h.style.fontSize=
         (14+Math.random()*24)+"px";
 
     h.style.animationDuration=
-        (6+Math.random()*7)+"s";
+        (7+Math.random()*7)+"s";
 
     h.style.setProperty(
         "--x",
-        (-80+Math.random()*160)+"px"
+        (-100+Math.random()*200)+"px"
     );
 
     box.appendChild(h);
 
     setTimeout(function(){
         h.remove();
-    },15000);
+    },16000);
 }
 
 
-/* ================================
-   NAME
-================================ */
+/* =========================
+   NAME CHECK
+========================= */
 
 document.getElementById("enter").onclick=function(){
 
     var name=
-        document.getElementById("name")
+        document
+        .getElementById("name")
         .value
         .toLowerCase()
         .trim();
 
-    if(name.indexOf("jyoti")!==-1){
+    if(
+        name.indexOf("manshi")!==-1
+    ){
 
-        document.getElementById("error").textContent="";
+        document
+        .getElementById("error")
+        .textContent="";
 
         show("q1");
 
     }else{
 
-        document.getElementById("error").textContent=
-            "Please enter Jyoti ❤️";
+        document
+        .getElementById("error")
+        .textContent=
+            "Please enter Manshi ❤️";
     }
 };
 
 
-/* ================================
+/* Enter key */
+
+document.getElementById("name").addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key==="Enter"){
+            document.getElementById("enter").click();
+        }
+
+    }
+);
+
+
+/* =========================
    QUESTIONS
-================================ */
+========================= */
 
 document.getElementById("goQ2").onclick=function(){
     show("q2");
@@ -1213,16 +1769,16 @@ document.getElementById("begin").onclick=function(){
 
             setTimeout(function(){
                 show("intro");
-            },700);
+            },800);
         }
 
     },1000);
 };
 
 
-/* ================================
+/* =========================
    MUSIC
-================================ */
+========================= */
 
 function musicStart(){
 
@@ -1239,9 +1795,9 @@ function musicStart(){
 }
 
 
-/* ================================
+/* =========================
    STORY
-================================ */
+========================= */
 
 var photos=[
     "photo1.jpg",
@@ -1261,7 +1817,6 @@ var photos=[
     "photo15.jpg"
 ];
 
-
 var captions=[
     "Some people enter our life unexpectedly... ❤️",
     "And somehow become incredibly important. 💗",
@@ -1277,13 +1832,16 @@ var captions=[
     "I promise to let my actions speak.",
     "Thank you for every beautiful memory. ✨",
     "Thank you for every little moment. 💗",
-    "I'm genuinely sorry, Jyoti. ❤️"
+    "I'm genuinely sorry, Manshi. ❤️"
 ];
-
 
 var current=0;
 var timer=null;
 
+
+/* =========================
+   START STORY
+========================= */
 
 document.getElementById("storyBtn").onclick=function(){
 
@@ -1299,6 +1857,10 @@ document.getElementById("storyBtn").onclick=function(){
 };
 
 
+/* =========================
+   DISPLAY PHOTO
+========================= */
+
 function displayPhoto(){
 
     if(current>=photos.length){
@@ -1307,11 +1869,10 @@ function displayPhoto(){
 
         setTimeout(function(){
             show("reasons");
-        },700);
+        },900);
 
         return;
     }
-
 
     var photo=
         document.getElementById("photo");
@@ -1331,31 +1892,52 @@ function displayPhoto(){
     old.src=photo.src;
 
 
-    /* New image */
+    /* Load next image */
 
     photo.src=photos[current];
 
 
-    /* Caption */
+    /* Caption animation */
 
-    caption.textContent=
-        captions[current];
+    caption.style.opacity="0";
+
+    caption.style.transform=
+        "translateY(10px)";
+
+    setTimeout(function(){
+
+        caption.textContent=
+            captions[current];
+
+        caption.style.opacity="1";
+
+        caption.style.transform=
+            "translateY(0)";
+
+    },250);
 
 
     /* Progress */
 
     bar.style.width=
-        ((current+1)/photos.length*100)+"%";
+        (
+            (current+1)/
+            photos.length*
+            100
+        )+"%";
 
 
-    /* Restart animation */
+    /* Reset animations */
 
     photo.classList.remove(
         "enter-flip",
         "enter-wave"
     );
 
-    old.classList.remove("exit-photo");
+    old.classList.remove(
+        "exit-photo"
+    );
+
 
     void photo.offsetWidth;
     void old.offsetWidth;
@@ -1364,13 +1946,24 @@ function displayPhoto(){
     /* Alternate effects */
 
     if(current%2===0){
-        photo.classList.add("enter-flip");
+
+        photo.classList.add(
+            "enter-flip"
+        );
+
     }else{
-        photo.classList.add("enter-wave");
+
+        photo.classList.add(
+            "enter-wave"
+        );
     }
 
-    old.classList.add("exit-photo");
+    old.classList.add(
+        "exit-photo"
+    );
 
+
+    /* Next photo */
 
     timer=setTimeout(function(){
 
@@ -1378,40 +1971,63 @@ function displayPhoto(){
 
         displayPhoto();
 
-    },5500);
+    },5600);
 }
 
 
-/* ================================
+/* =========================
    FINAL NAVIGATION
-================================ */
+========================= */
 
-document.getElementById("promiseBtn").onclick=function(){
+document.getElementById(
+    "promiseBtn"
+).onclick=function(){
+
     show("promiseScreen");
+
 };
 
 
-document.getElementById("letterBtn").onclick=function(){
+document.getElementById(
+    "letterBtn"
+).onclick=function(){
+
     show("letterScreen");
+
 };
 
 
-document.getElementById("finalBtn").onclick=function(){
+document.getElementById(
+    "finalBtn"
+).onclick=function(){
+
     show("final");
+
 };
 
 
-/* ================================
+/* =========================
    START EFFECTS
-================================ */
+========================= */
 
 makeStars();
 
-setInterval(makeHeart,800);
-setInterval(makeWord,2300);
+setInterval(
+    makeHeart,
+    900
+);
 
-for(var i=0;i<5;i++){
-    setTimeout(makeWord,i*500);
+setInterval(
+    makeWord,
+    2600
+);
+
+for(var i=0;i<6;i++){
+
+    setTimeout(
+        makeWord,
+        i*550
+    );
 }
 </script>
 
