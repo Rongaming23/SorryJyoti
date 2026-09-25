@@ -110,58 +110,9 @@ body::before{
   box-shadow:0 0 20px rgba(255,100,210,.18);cursor:pointer;font-size:17px
 }
 .music-control.on{box-shadow:0 0 25px rgba(255,120,220,.55)}
-
-.photo{
-  will-change:transform,opacity,filter;
-  animation-duration:1.25s;
-  animation-fill-mode:both;
-}
-.photo.active{
-  animation:cinematicIn 1.25s ease both, gentleZoom 18s ease-in-out .9s both;
-}
-@keyframes cinematicIn{
-  0%{opacity:0;transform:scale(1.10) translateY(28px) rotate(-1.2deg);filter:blur(12px) brightness(.72)}
-  45%{opacity:1;filter:blur(1px) brightness(.96)}
-  100%{opacity:1;transform:scale(1) translateY(0) rotate(0);filter:blur(0) brightness(1)}
-}
-@keyframes gentleZoom{
-  0%{transform:scale(1)}
-  100%{transform:scale(1.045)}
-}
-.photo-wrap::before{
-  content:"";position:absolute;width:62%;height:70%;border-radius:30px;
-  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.12) 50%,transparent 70%);
-  transform:translateX(-130%) skewX(-15deg);
-  animation:shineSweep 7s ease-in-out infinite;
-  pointer-events:none;z-index:3;
-}
-@keyframes shineSweep{
-  0%,55%{transform:translateX(-130%) skewX(-15deg);opacity:0}
-  65%{opacity:.8}
-  82%,100%{transform:translateX(130%) skewX(-15deg);opacity:0}
-}
-.message{animation:letterRise .9s ease both}
-@keyframes letterRise{
-  from{opacity:0;transform:translateY(16px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.image-spark{
-  position:absolute;pointer-events:none;z-index:6;color:#ffd9f3;font-size:14px;
-  animation:sparkBurst 1.2s ease-out forwards;
-}
-@keyframes sparkBurst{
-  0%{opacity:0;transform:translate(0,0) scale(.3)}
-  20%{opacity:1}
-  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.35) rotate(180deg)}
-}
-
 </style>
 </head>
 <body>
-<audio id="bgMusic" loop preload="auto">
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
-<button id="musicBtn" class="music-control" aria-label="Toggle music">♫</button>
 <div id="stars"></div>
 <div class="floaters" id="floaters"></div>
 
@@ -243,11 +194,7 @@ function typeText(str){
 
 function show(n,manual=false){
   index=(n+slides.length)%slides.length;
-  photos.forEach((p,i)=>{
-    p.classList.remove("active");
-    if(i===index){ void p.offsetWidth; p.classList.add("active"); }
-  });
-  createImageSparks();
+  photos.forEach((p,i)=>p.classList.toggle("active",i===index));
   title.textContent=slides[index].title;
   typeText(slides[index].text);
   finalQuestion.style.display = index === slides.length - 1 ? "block" : "none";
@@ -262,23 +209,6 @@ function restart(){
 }
 document.getElementById("next").onclick=()=>show(index+1,true);
 document.getElementById("prev").onclick=()=>show(index-1,true);
-
-
-function createImageSparks(){
-  const wrap=document.getElementById("photoWrap");
-  if(!wrap) return;
-  for(let i=0;i<12;i++){
-    const s=document.createElement("span");
-    s.className="image-spark";
-    s.textContent=["✦","✧","·","♡"][Math.floor(Math.random()*4)];
-    s.style.left=(20+Math.random()*60)+"%";
-    s.style.top=(15+Math.random()*65)+"%";
-    s.style.setProperty("--dx",(Math.random()*150-75)+"px");
-    s.style.setProperty("--dy",(Math.random()*120-60)+"px");
-    wrap.appendChild(s);
-    setTimeout(()=>s.remove(),1300);
-  }
-}
 
 function createStars(){
   const box=document.getElementById("stars");
@@ -308,85 +238,62 @@ function floatHeart(){
 createStars();
 setInterval(floatHeart,850);
 
-// Lightweight original ambient melody using Web Audio — no external song required.
-let audioCtx, master, musicTimer, noteIndex=0;
-const notes=[261.63,329.63,392.00,523.25,392.00,329.63,293.66,349.23];
+// Gentle original browser-generated instrumental music.
+// It uses Web Audio, so no copyrighted song file is bundled with the website.
+let audioCtx = null, musicTimer = null, musicOn = false, musicStep = 0;
+const musicBtn = document.getElementById("musicBtn");
 
-function startMusic(){
-  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-  master=audioCtx.createGain();
-  master.gain.value=.045;
-  master.connect(audioCtx.destination);
-  const playNote=()=>{
-    if(!playing) return;
-    const osc=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
-    osc.type="sine";
-    osc.frequency.value=notes[noteIndex++%notes.length];
-    gain.gain.setValueAtTime(0.0001,audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.45,audioCtx.currentTime+.06);
-    gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.9);
-    osc.connect(gain); gain.connect(master);
-    osc.start(); osc.stop(audioCtx.currentTime+.95);
-  };
-  playNote();
-  musicTimer=setInterval(playNote,1050);
+const melody = [
+  [261.63, 329.63, 392.00], [293.66, 349.23, 440.00],
+  [261.63, 329.63, 392.00], [246.94, 311.13, 392.00],
+  [220.00, 293.66, 349.23], [246.94, 329.63, 392.00],
+  [261.63, 329.63, 440.00], [293.66, 349.23, 440.00]
+];
+
+function note(freq, when, duration=.8, volume=.035){
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "sine";
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(0.0001, when);
+  gain.gain.exponentialRampToValueAtTime(volume, when + .06);
+  gain.gain.exponentialRampToValueAtTime(0.0001, when + duration);
+  osc.connect(gain).connect(audioCtx.destination);
+  osc.start(when);
+  osc.stop(when + duration + .03);
 }
-function stopMusic(){
-  clearInterval(musicTimer);
-  if(master) master.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.25);
+
+function scheduleMusic(){
+  if(!musicOn) return;
+  const now = audioCtx.currentTime;
+  const chord = melody[musicStep % melody.length];
+  chord.forEach((f,i)=>note(f, now + i*.03, 1.8, i===0 ? .035 : .022));
+  note(chord[0]*2, now+.45, .9, .012);
+  musicStep++;
+  musicTimer = setTimeout(scheduleMusic, 1500);
 }
-document.getElementById("musicBtn").onclick=()=>{
-  if(!playing){
-    playing=true; startMusic();
-    document.getElementById("musicBtn").textContent="♫ Music: On";
+
+async function toggleMusic(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === "suspended") await audioCtx.resume();
+  musicOn = !musicOn;
+  musicBtn.classList.toggle("on", musicOn);
+  musicBtn.textContent = musicOn ? "♫" : "♪";
+  if(musicOn){
+    scheduleMusic();
   }else{
-    playing=false; stopMusic();
-    document.getElementById("musicBtn").textContent="♫ Music: Off";
-  }
-};
-
-document.getElementById("start").onclick=()=>{
-  document.getElementById("intro").classList.add("hide");
-  show(0);
-  restart();
-};
-
-
-
-
-}
-
-
-const bgMusic = document.getElementById("bgMusic");
-const musicButton = document.getElementById("musicBtn");
-if(bgMusic) bgMusic.volume = 0.35;
-
-function startBackgroundSong(){
-  if(!bgMusic) return;
-  bgMusic.play().then(()=>{
-    if(musicButton){
-      musicButton.textContent="♫";
-      musicButton.classList.add("on");
-    }
-  }).catch(()=>{});
-}
-function toggleBackgroundSong(){
-  if(!bgMusic) return;
-  if(bgMusic.paused){
-    bgMusic.play().then(()=>{
-      musicButton.textContent="♫";
-      musicButton.classList.add("on");
-    }).catch(()=>{});
-  }else{
-    bgMusic.pause();
-    musicButton.textContent="♪";
-    musicButton.classList.remove("on");
+    clearTimeout(musicTimer);
   }
 }
-if(musicButton) musicButton.onclick=toggleBackgroundSong;
-const openButton=document.getElementById("start");
-if(openButton) openButton.addEventListener("click",startBackgroundSong);
+musicBtn.addEventListener("click", toggleMusic);
+
+// The first click on the opening button is a user gesture, so start the music there.
+const startButton = document.getElementById("start");
+if(startButton){
+  startButton.addEventListener("click", async ()=>{
+    if(!musicOn) await toggleMusic();
+  });
+}
 
 </script>
 </body>
