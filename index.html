@@ -113,6 +113,8 @@ body::before{
 </style>
 </head>
 <body>
+<button id="musicBtn" class="music-control" aria-label="Toggle music">♫ Music: Off</button>
+<audio id="bgMusic" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
 <div id="stars"></div>
 <div class="floaters" id="floaters"></div>
 
@@ -121,7 +123,6 @@ body::before{
   <section class="card">
     <div class="top">
       <div class="badge">A little page made with care ✦</div>
-      <button class="music" id="musicBtn">♫ Music: Off</button>
     </div>
 
     <div class="photo-wrap" id="photoWrap"></div>
@@ -238,63 +239,48 @@ function floatHeart(){
 createStars();
 setInterval(floatHeart,850);
 
-// Gentle original browser-generated instrumental music.
-// It uses Web Audio, so no copyrighted song file is bundled with the website.
-let audioCtx = null, musicTimer = null, musicOn = false, musicStep = 0;
+// Optional MP3 background music. Put song.mp3 beside index.html.
+const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
+let musicOn = false;
 
-const melody = [
-  [261.63, 329.63, 392.00], [293.66, 349.23, 440.00],
-  [261.63, 329.63, 392.00], [246.94, 311.13, 392.00],
-  [220.00, 293.66, 349.23], [246.94, 329.63, 392.00],
-  [261.63, 329.63, 440.00], [293.66, 349.23, 440.00]
-];
-
-function note(freq, when, duration=.8, volume=.035){
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type = "sine";
-  osc.frequency.value = freq;
-  gain.gain.setValueAtTime(0.0001, when);
-  gain.gain.exponentialRampToValueAtTime(volume, when + .06);
-  gain.gain.exponentialRampToValueAtTime(0.0001, when + duration);
-  osc.connect(gain).connect(audioCtx.destination);
-  osc.start(when);
-  osc.stop(when + duration + .03);
-}
-
-function scheduleMusic(){
-  if(!musicOn) return;
-  const now = audioCtx.currentTime;
-  const chord = melody[musicStep % melody.length];
-  chord.forEach((f,i)=>note(f, now + i*.03, 1.8, i===0 ? .035 : .022));
-  note(chord[0]*2, now+.45, .9, .012);
-  musicStep++;
-  musicTimer = setTimeout(scheduleMusic, 1500);
+function updateMusicButton(){
+  musicBtn.textContent = musicOn ? "♫ Music: On" : "♫ Music: Off";
+  musicBtn.classList.toggle("on", musicOn);
 }
 
 async function toggleMusic(){
-  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if(audioCtx.state === "suspended") await audioCtx.resume();
-  musicOn = !musicOn;
-  musicBtn.classList.toggle("on", musicOn);
-  musicBtn.textContent = musicOn ? "♫" : "♪";
-  if(musicOn){
-    scheduleMusic();
-  }else{
-    clearTimeout(musicTimer);
+  try{
+    if(!musicOn){
+      await bgMusic.play();
+      musicOn = true;
+    }else{
+      bgMusic.pause();
+      musicOn = false;
+    }
+  }catch(e){
+    // If song.mp3 is not present, the slideshow still works normally.
+    musicOn = false;
   }
+  updateMusicButton();
 }
-musicBtn.addEventListener("click", toggleMusic);
 
-// The first click on the opening button is a user gesture, so start the music there.
+musicBtn.addEventListener("click", toggleMusic);
+bgMusic.addEventListener("ended", ()=>{
+  musicOn = false;
+  updateMusicButton();
+});
+
 const startButton = document.getElementById("start");
 if(startButton){
-  startButton.addEventListener("click", async ()=>{
-    if(!musicOn) await toggleMusic();
+  startButton.addEventListener("click", ()=>{
+    document.getElementById("intro").classList.add("hide");
+    show(0);
+    restart();
   });
 }
 
+updateMusicButton();
 </script>
 </body>
 </html>
