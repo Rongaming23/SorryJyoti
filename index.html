@@ -1,286 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Something For You ✨</title>
-<meta name="theme-color" content="#080018">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Little Page, Just Because You Smile Рюд</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;height:100%;overflow:hidden}
-body{
-  font-family: Georgia, "Times New Roman", serif;
-  background:#05000f;
-  color:#fff;
-  min-height:100vh;
-}
-body::before{
-  content:"";position:fixed;inset:-20%;
-  background:
-    radial-gradient(circle at 20% 25%, rgba(255,70,180,.20), transparent 28%),
-    radial-gradient(circle at 80% 20%, rgba(90,120,255,.20), transparent 30%),
-    radial-gradient(circle at 50% 85%, rgba(180,50,255,.16), transparent 30%);
-  filter:blur(30px);animation:bg 12s ease-in-out infinite alternate;
-  z-index:-3;
-}
-@keyframes bg{to{transform:scale(1.12) rotate(2deg)}}
-
-#stars,.floaters{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:2}
-.star{position:absolute;color:#fff;opacity:.75;animation:twinkle 2.5s infinite ease-in-out}
-@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.2)}}
-
-.floater{position:absolute;font-size:22px;opacity:.0;animation:floatUp linear forwards}
-@keyframes floatUp{
-  0%{transform:translateY(20vh) scale(.6) rotate(0);opacity:0}
-  15%{opacity:.75}
-  100%{transform:translateY(-115vh) scale(1.2) rotate(360deg);opacity:0}
-}
-
-#app{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:16px}
-.glow{position:absolute;width:75vw;height:75vw;max-width:700px;max-height:700px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,77,191,.16),transparent 65%);
-  filter:blur(10px);z-index:-1}
-.card{width:min(940px,96vw);height:min(92vh,900px);position:relative;display:flex;flex-direction:column;
-  border:1px solid rgba(255,255,255,.18);border-radius:28px;overflow:hidden;
-  background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
-  backdrop-filter:blur(16px);box-shadow:0 0 50px rgba(184,72,255,.20), inset 0 0 40px rgba(255,255,255,.03)}
-
-.top{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;z-index:5}
-.badge{font:600 12px/1.2 Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;opacity:.75}
-.music{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:white;
-  border-radius:999px;padding:9px 13px;cursor:pointer;font:600 12px Arial;transition:.25s}
-.music:hover{background:rgba(255,255,255,.16);transform:translateY(-1px)}
-
-.photo-wrap{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px 28px 0}
-.photo{position:absolute;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:22px;
-  box-shadow:0 18px 55px rgba(0,0,0,.45);opacity:0;transform:scale(.96) translateY(10px);
-  transition:opacity .9s ease, transform .9s ease}
-.photo.active{opacity:1;transform:scale(1) translateY(0)}
-.photo::after{content:""}
-
-.message{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:min(760px,88%);
-  text-align:center;padding:16px 20px;border-radius:20px;background:rgba(5,0,18,.58);
-  border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);box-shadow:0 0 28px rgba(255,70,190,.13);
-  z-index:4}
-.message h1{font-size:clamp(22px,4vw,40px);font-weight:500;letter-spacing:.3px;margin-bottom:6px;
-  text-shadow:0 0 16px rgba(255,160,230,.65)}
-.message p{font:400 clamp(13px,1.8vw,17px)/1.5 Arial,sans-serif;opacity:.9;min-height:26px}
-.cursor{display:inline-block;width:7px;height:1em;vertical-align:-2px;background:#ffb9e8;animation:blink .8s infinite}
-@keyframes blink{50%{opacity:0}}
-
-.controls{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px 17px;z-index:5}
-.ctrl{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);
-  color:#fff;cursor:pointer;font-size:16px;transition:.2s}
-.ctrl:hover{transform:scale(1.08);background:rgba(255,255,255,.13)}
-.progress{width:min(340px,45vw);height:4px;background:rgba(255,255,255,.13);border-radius:10px;overflow:hidden}
-.bar{height:100%;width:0;background:linear-gradient(90deg,#ff76ca,#a888ff,#71d7ff);box-shadow:0 0 12px #ff76ca;transition:width .2s linear}
-.count{font:12px Arial;color:rgba(255,255,255,.65);min-width:40px;text-align:center}
-
-.intro{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:25px;
-  background:radial-gradient(circle at center,rgba(48,11,72,.92),rgba(3,0,13,.97));transition:opacity .8s,visibility .8s}
-.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
-.intro-box{max-width:650px;text-align:center}
-.crown{font-size:54px;filter:drop-shadow(0 0 14px #ffd36b);animation:bob 2s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-8px) rotate(-3deg)}}
-.intro h2{font-size:clamp(30px,7vw,62px);font-weight:500;margin:10px 0;
-  text-shadow:0 0 25px rgba(255,120,210,.7)}
-.intro p{font:15px/1.6 Arial;color:rgba(255,255,255,.76);margin:0 auto 22px;max-width:520px}
-.start{border:0;border-radius:999px;padding:13px 24px;color:#21001b;background:linear-gradient(90deg,#ffd1ef,#d7c8ff);
-  font:bold 14px Arial;cursor:pointer;box-shadow:0 0 25px rgba(255,130,220,.45);transition:.25s}
-.start:hover{transform:scale(1.05);box-shadow:0 0 38px rgba(255,130,220,.65)}
-
-@media(max-width:600px){
-  .card{height:95vh;border-radius:22px}
-  .photo-wrap{padding:4px 10px 0}
-  .message{bottom:10px;width:92%;padding:12px 14px}
-  .message h1{font-size:22px}
-  .message p{font-size:13px}
-  .controls{padding-bottom:12px}
-}
-
-.intro-box{animation:introIn 1.1s ease both}
-@keyframes introIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
-.intro .tiny-note{font:11px Arial,sans-serif;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:16px}
-.final-question{font-size:clamp(18px,3vw,28px);margin-top:12px;color:#ffd5f1;text-shadow:0 0 14px rgba(255,150,220,.7)}
-
-.music-control{
-  position:fixed;right:16px;top:16px;z-index:30;width:42px;height:42px;
-  border-radius:50%;border:1px solid rgba(255,255,255,.25);
-  background:rgba(8,0,20,.58);color:#fff;backdrop-filter:blur(10px);
-  box-shadow:0 0 20px rgba(255,100,210,.18);cursor:pointer;font-size:17px
-}
-.music-control.on{box-shadow:0 0 25px rgba(255,120,220,.55)}
-</style>
-</head>
+:root{--pink:#ffb8e8;--violet:#c9b6ff;--ink:#10091c;--glass:rgba(255,255,255,.09)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#08050e;color:#fff}
+body:before{content:"";position:fixed;inset:-30%;background:radial-gradient(circle at 20% 20%,#5b285f55,transparent 30%),radial-gradient(circle at 80% 20%,#3b438055,transparent 32%),radial-gradient(circle at 50% 90%,#8a397044,transparent 30%);filter:blur(45px);animation:ambient 18s ease-in-out infinite alternate;z-index:-3}@keyframes ambient{to{transform:scale(1.13) rotate(3deg)}}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:10}.particle{position:absolute;bottom:-40px;opacity:0;animation:rise linear forwards;text-shadow:0 0 15px #ffd7f6}@keyframes rise{12%{opacity:.8}100%{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+.shell{height:100%;display:grid;place-items:center;padding:18px}.app{width:min(1080px,96vw);height:min(94vh,920px);position:relative;overflow:hidden;border:1px solid #ffffff22;border-radius:32px;background:linear-gradient(145deg,#ffffff12,#ffffff03);box-shadow:0 30px 100px #0009,0 0 70px #d47dff18;backdrop-filter:blur(22px)}
+.top{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #ffffff12;position:relative;z-index:4}.brand{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#ffffffaa}.musicStatus{font-size:11px;letter-spacing:1px;color:#ffffff88}
+.stage{position:absolute;left:0;right:0;top:66px;bottom:74px;display:grid;place-items:center;overflow:hidden}.photo{position:absolute;max-width:86%;max-height:88%;width:auto;height:auto;object-fit:contain;border-radius:24px;opacity:0;filter:blur(10px);transform:scale(.94) translateY(18px);transition:opacity .9s ease,filter .9s ease,transform 1s cubic-bezier(.2,.8,.2,1);box-shadow:0 28px 80px #000b}.photo.active{opacity:1;filter:blur(0);transform:scale(1) translateY(0)}.photo.active{animation:ken 8s ease-out both}@keyframes ken{from{transform:scale(1.01)}to{transform:scale(1.055)}}
+.shine{position:absolute;width:50%;height:120%;transform:rotate(18deg) translateX(-240%);background:linear-gradient(90deg,transparent,#ffffff22,transparent);pointer-events:none;z-index:2}.shine.go{animation:shine 1.4s ease}@keyframes shine{to{transform:rotate(18deg) translateX(340%)}}
+.caption{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:min(820px,88%);padding:19px 24px;text-align:center;border:1px solid #ffffff1c;border-radius:22px;background:#0b0714b8;backdrop-filter:blur(18px);z-index:3;box-shadow:0 12px 50px #0008}.caption h1{margin:0 0 7px;font:500 clamp(22px,4vw,39px)/1.1 Georgia,serif;color:#fff;text-shadow:0 0 24px #ffb9e855}.caption p{margin:0;color:#ffffffd0;font-size:clamp(13px,1.6vw,16px);line-height:1.55}.caption .final{display:none;margin-top:12px;color:#ffd7f1;font:500 22px Georgia,serif}
+.footer{position:absolute;left:0;right:0;bottom:0;height:74px;display:flex;align-items:center;justify-content:center;gap:14px;z-index:5;border-top:1px solid #ffffff12}.nav{width:43px;height:43px;border-radius:50%;border:1px solid #ffffff22;background:#ffffff0d;color:white;font-size:18px;cursor:pointer;transition:.25s}.nav:hover{transform:translateY(-2px) scale(1.06);background:#ffffff18}.track{width:min(430px,45vw);height:3px;background:#ffffff17;border-radius:99px;overflow:hidden}.progress{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--violet),#a8e5ff);box-shadow:0 0 14px #ffb9e8}.count{font-size:11px;color:#ffffff77;min-width:35px;text-align:center}
+.intro{position:absolute;inset:0;z-index:30;display:grid;place-items:center;padding:30px;background:radial-gradient(circle at 50% 38%,#4b205dcc,#08050ef5 62%)}.introCard{max-width:720px;text-align:center;animation:enter 1.1s cubic-bezier(.2,.8,.2,1)}@keyframes enter{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}.eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#ffffff70}.intro h1{font:500 clamp(39px,7vw,76px)/.98 Georgia,serif;margin:18px 0;background:linear-gradient(90deg,#fff,var(--pink),#d7ccff,#fff);-webkit-background-clip:text;color:transparent;background-size:250%;animation:gradient 7s linear infinite}@keyframes gradient{to{background-position:250%}}.intro p{max-width:620px;margin:0 auto 27px;color:#ffffffb8;font-size:15px;line-height:1.75}.open{border:1px solid #ffffff33;border-radius:999px;padding:15px 27px;background:linear-gradient(100deg,#ffd2ed,#d8d0ff);color:#170b1d;font-weight:800;cursor:pointer;box-shadow:0 0 35px #f4a9dc45;transition:.25s}.open:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 0 48px #f4a9dc66}.tiny{margin-top:17px;font-size:10px;letter-spacing:2px;color:#ffffff55;text-transform:uppercase}.intro.hide{opacity:0;visibility:hidden;pointer-events:none;transition:.8s}
+.endPanel{display:none;margin-top:15px;padding:16px 18px;border:1px solid #ffffff17;border-radius:18px;background:#ffffff08;text-align:left}.endPanel h3{margin:0 0 8px;font:500 22px Georgia,serif;color:#ffd5ef}.endPanel p{margin:0;color:#ffffffbd;font-size:13px;line-height:1.7}.flowers{margin-top:12px;font-size:20px;letter-spacing:8px}
+@media(max-width:650px){.shell{padding:8px}.app{height:96vh;border-radius:23px}.top{height:54px;padding:0 14px}.stage{top:54px;bottom:64px}.photo{max-width:94%;max-height:75%}.caption{bottom:10px;width:94%;padding:13px 14px}.caption h1{font-size:22px}.caption p{font-size:12px;line-height:1.45;max-height:82px;overflow:auto}.footer{height:64px}.track{width:35vw}.intro p{font-size:13px;line-height:1.6}.intro h1{font-size:43px}}
+</style></head>
 <body>
-<button id="musicBtn" class="music-control" aria-label="Toggle music">♫ Music: Off</button>
-<audio id="bgMusic" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
-<div id="stars"></div>
-<div class="floaters" id="floaters"></div>
-
-<div id="app">
-  <div class="glow"></div>
-  <section class="card">
-    <div class="top">
-      <div class="badge">A little page made with care ✦</div>
-    </div>
-
-    <div class="photo-wrap" id="photoWrap"></div>
-
-    <div class="message">
-      <h1 id="title">A little reminder…</h1>
-      <p id="text"></p><div id="finalQuestion" class="final-question" style="display:none">Can we be friends? 🌸</div><span class="cursor"></span>
-    </div>
-
-    <div class="controls">
-      <button class="ctrl" id="prev" aria-label="Previous">‹</button>
-      <div class="progress"><div class="bar" id="bar"></div></div>
-      <div class="count" id="count">1 / 8</div>
-      <button class="ctrl" id="next" aria-label="Next">›</button>
-    </div>
-  </section>
-
-  <div class="intro" id="intro">
-    <div class="intro-box">
-      <div class="crown">♕</div>
-      <h2>A Little Page, Just Because You Smile ✨</h2><p>We don't really know each other, and I know a photograph can never tell the whole story about someone. I just happened to notice your smile in these pictures, and it genuinely made me smile too. So instead of sending a random message, I made this tiny website — not to judge you or assume anything about you, but simply to share the little things I noticed in the photos and the good feeling they gave me. If anything here feels too much, please know it was only meant as a kind, respectful compliment.</p><button class="start" id="start">Open the little page ♡</button><div class="tiny-note">No assumptions • Just an honest observation</div>
-    </div>
-  </div>
-</div>
-
+<div id="particles"></div>
+<div class="shell"><main class="app">
+<header class="top"><div class="brand">A little page Рђб made with care</div><div class="musicStatus">РЎФ background music</div></header>
+<section class="stage" id="stage"><div class="shine" id="shine"></div><div id="photos"></div>
+<div class="caption"><h1 id="title"></h1><p id="copy"></p><div class="final" id="final">SoРђд can we be friends? ­ЪїИ</div><div class="endPanel" id="endPanel"><h3>One little note about friendship</h3><p>If we ever become friends, I hope it means simple things: good conversations, random laughs, cheering each other on, sharing little wins, being comfortable enough to be ourselves, and having one more person to make an ordinary day feel a little nicer. No promises, no pressure Рђћ just the possibility of a genuinely good friendship.</p><div class="flowers">­Ъїи Рю┐ ­ЪїИ РЮђ ­Ъї╝</div></div></div>
+</section>
+<footer class="footer"><button class="nav" id="prev">Рђ╣</button><div class="track"><div class="progress" id="progress"></div></div><div class="count" id="count">1 / 8</div><button class="nav" id="next">Рђ║</button></footer>
+<div class="intro" id="intro"><div class="introCard"><div class="eyebrow">A tiny creative hello</div><h1>A Little Page,<br>Just Because You Smile Рюд</h1><p>We don't really know each other, so I won't pretend I know your story. I simply noticed your smile in these photographs, liked the feeling it gave me, and decided to turn that small observation into something creative. Eight photographs, a few honest compliments, and one simple question Рђћ with absolutely no pressure attached.</p><button class="open" id="open">Open the little page</button><div class="tiny">No assumptions Рђб just a kind hello</div></div></div>
+</main></div>
+<audio id="bgMusic" src="song.mp3" preload="auto" loop></audio>
 <script>
-const slides = [
-    {title: 'The smile that started this', text: "This was probably the first thing I noticed: the smile. There is something naturally warm about the way it appears in the frame, and that small moment is honestly what inspired this entire page. I don't know the person behind the photograph yet, so I won't pretend that I do. I can only say what the picture made me notice — a simple expression that caught my attention enough for me to want to create something a little different instead of writing a usual compliment."},
-    {title: 'A quiet kind of charm 🌸', text: "What stands out in this photo is how relaxed the moment feels. The outdoor setting, the simple outfit, and the expression all come together without looking overly planned. I like photographs that feel like a real moment rather than something that has to be perfect. That's what I noticed here. Of course, a photo is only one little frame of someone's life, so this isn't me trying to define you — it is simply my honest observation of a picture that I found beautiful."},
-    {title: 'That little happy moment 💫', text: "There is a very genuine-looking happiness in this photograph, especially in the smile. The braces, the expression, and the way the moment was captured make it feel personal rather than overly posed. I think that is what makes a smile memorable: not whether it looks perfect, but whether it feels real. I don't know your story or what was happening when this picture was taken, and I don't want to invent one. I just wanted to appreciate the small visual moment that made me stop and notice."},
-    {title: 'A frame with personality 👑', text: 'This photograph has a completely different mood from the others, and that is what caught my eye. The expression, the pose, the earrings, and the colourful background give the picture its own energy. It feels playful and confident without needing a complicated explanation. Again, this is only an observation from a photograph, not a statement about who you are in real life. I simply like how naturally the moment comes across and how easily it makes the picture memorable.'},
-    {title: 'The effortless look ✨', text: "This one has a more calm and editorial feeling to it. The pose, the lighting, the blue outfit, and the way you are looking away from the camera create a very different atmosphere. What I like most is that it doesn't feel like the same picture repeated in another outfit — it has its own mood. I don't know what you were thinking in that moment, so I won't make up a story for it. I'll just say that the overall frame has a quiet, graceful quality that I really liked."},
-    {title: 'A little bit of sunshine ☀️', text: "There is something lovely about this outdoor photograph: the cloudy sky, the green background, the basketball court, and that small smile all balance each other. It feels casual and bright at the same time. Looking through these photos, I started noticing how much the expression changes the whole mood of a picture. That's really the simple reason this website exists — I noticed a smile, liked the feeling it gave me, and decided to turn that small observation into something creative and harmless rather than making assumptions about someone I haven't met."},
-    {title: 'A different side of the frame 🌷', text: "This picture feels more thoughtful and quiet. The architecture, the sunlight, the turned-away pose, and the simple clothes make the photograph feel almost like a candid travel moment. I don't know where you were going or what was on your mind, and I don't need to know to appreciate the picture. Sometimes a photograph is nice simply because the composition works: the light, the surroundings, and the person all happen to come together at the right moment. That's what I noticed here."},
-    {title: 'So… can we be friends? 💖', text: "After looking at these photographs, I realised I didn't actually want to write a huge story about someone I don't know. I just wanted to say something simple: your smile caught my attention, and it made me curious to know the person behind it. There is no pressure behind this little website, and you don't owe me a reply. If you ever feel comfortable, though, I'd genuinely like the chance to say hello, have a normal conversation, and get to know you as a person rather than just a face in photographs. So, after all these little observations, I have one simple question: Can we be friends? 🌸"}
+(() => {
+'use strict';
+const slides=[
+['The smile that started this','This was the first detail I noticed. Not because a smile has to be perfect, but because this one immediately made the photograph feel warmer. I do not know you yet, so this is not me defining you Рђћ just appreciating the little moment that caught my attention.'],
+['A little sunshine in a frame','There is something quietly cheerful about this picture. The setting, the expression and the relaxed feeling all work together beautifully. A photograph is only one tiny moment, but sometimes one tiny moment is enough to make someone stop scrolling and smile.'],
+['That happy little moment Рюд','What I like here is how naturally the smile changes the whole picture. It feels like a small, memorable moment rather than something that needs a complicated explanation. I do not know what was happening behind the camera, and I will not invent a story Рђћ I simply liked what I saw.'],
+['A frame with personality','The expression, pose, earrings and colourful background give this photograph its own character. It feels playful and distinctive. This is only an observation of the picture, but it is the kind of frame that is easy to remember.'],
+['Quiet, effortless elegance','This photograph has a calmer mood. The lighting, blue outfit and turned-away pose create a soft, almost editorial feeling. I like that it has a completely different atmosphere from the other pictures without needing to be overdone.'],
+['A little bit of sunshine Рўђ','The outdoor setting gives this one a bright, easy feeling. Looking through the photos, I realised the smile kept being the detail that pulled my attention back. That is honestly the whole reason this page exists.'],
+['A different kind of beautiful','The architecture, sunlight and composition make this frame feel peaceful and thoughtful. I do not know what was on your mind in that moment, and I do not need to guess. Sometimes a picture is simply lovely because all its little pieces come together.'],
+['A simple question ­ЪїИ','I do not want to write a huge story about someone I have not met. I would rather leave you with something simple: your smile caught my attention, and it made me curious to know the person behind the photographs. No pressure and no expectation Рђћ just a genuine hello.']
 ];
-
-const images = [
-  "photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg",
-  "photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg"
-];
-
-const wrap = document.getElementById("photoWrap");
-images.forEach((src,i)=>{
-  const img=document.createElement("img");
-  img.className="photo"+(i===0?" active":"");
-  img.src=src;
-  img.alt="Memory "+(i+1);
-  wrap.appendChild(img);
-});
-
-const photos=[...document.querySelectorAll(".photo")];
-const title=document.getElementById("title");
-const text=document.getElementById("text");
-const bar=document.getElementById("bar");
-const count=document.getElementById("count");
-const finalQuestion=document.getElementById("finalQuestion");
-let index=0, timer=null, typingTimer=null, playing=false;
-const interval=6500;
-
-function typeText(str){
-  clearInterval(typingTimer);
-  text.textContent="";
-  let i=0;
-  typingTimer=setInterval(()=>{
-    text.textContent += str[i++] || "";
-    if(i>str.length) clearInterval(typingTimer);
-  },28);
-}
-
-function show(n,manual=false){
-  index=(n+slides.length)%slides.length;
-  photos.forEach((p,i)=>p.classList.toggle("active",i===index));
-  title.textContent=slides[index].title;
-  typeText(slides[index].text);
-  finalQuestion.style.display = index === slides.length - 1 ? "block" : "none";
-  count.textContent=(index+1)+" / "+slides.length;
-  bar.style.width=((index+1)/slides.length*100)+"%";
-  if(manual) restart();
-}
-
-function restart(){
-  clearTimeout(timer);
-  timer=setTimeout(()=>show(index+1),interval);
-}
-document.getElementById("next").onclick=()=>show(index+1,true);
-document.getElementById("prev").onclick=()=>show(index-1,true);
-
-function createStars(){
-  const box=document.getElementById("stars");
-  for(let i=0;i<55;i++){
-    const s=document.createElement("span");
-    s.className="star";
-    s.textContent=Math.random()>.45?"✦":"·";
-    s.style.left=Math.random()*100+"%";
-    s.style.top=Math.random()*100+"%";
-    s.style.fontSize=(8+Math.random()*14)+"px";
-    s.style.animationDelay=(Math.random()*3)+"s";
-    box.appendChild(s);
-  }
-}
-function floatHeart(){
-  const box=document.getElementById("floaters");
-  const f=document.createElement("span");
-  f.className="floater";
-  f.textContent=["♡","✦","✿","♥","❀"][Math.floor(Math.random()*5)];
-  f.style.left=Math.random()*100+"%";
-  f.style.bottom="-5vh";
-  f.style.animationDuration=(6+Math.random()*6)+"s";
-  f.style.fontSize=(14+Math.random()*22)+"px";
-  box.appendChild(f);
-  setTimeout(()=>f.remove(),13000);
-}
-createStars();
-setInterval(floatHeart,850);
-
-// Optional MP3 background music. Put song.mp3 beside index.html.
-const bgMusic = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-let musicOn = false;
-
-function updateMusicButton(){
-  musicBtn.textContent = musicOn ? "♫ Music: On" : "♫ Music: Off";
-  musicBtn.classList.toggle("on", musicOn);
-}
-
-async function toggleMusic(){
-  try{
-    if(!musicOn){
-      await bgMusic.play();
-      musicOn = true;
-    }else{
-      bgMusic.pause();
-      musicOn = false;
-    }
-  }catch(e){
-    // If song.mp3 is not present, the slideshow still works normally.
-    musicOn = false;
-  }
-  updateMusicButton();
-}
-
-musicBtn.addEventListener("click", toggleMusic);
-bgMusic.addEventListener("ended", ()=>{
-  musicOn = false;
-  updateMusicButton();
-});
-
-const startButton = document.getElementById("start");
-if(startButton){
-  startButton.addEventListener("click", ()=>{
-    document.getElementById("intro").classList.add("hide");
-    show(0);
-    restart();
-  });
-}
-
-updateMusicButton();
-</script>
-</body>
-</html>
+const images=Array.from({length:8},(_,i)=>`photo${i+1}.jpg`), photosBox=document.getElementById('photos');
+images.forEach((src,i)=>{const img=new Image();img.className='photo'+(i===0?' active':'');img.src=src;img.alt='Photo '+(i+1);photosBox.appendChild(img)});
+const photos=[...document.querySelectorAll('.photo')],title=document.getElementById('title'),copy=document.getElementById('copy'),progress=document.getElementById('progress'),count=document.getElementById('count'),final=document.getElementById('final'),endPanel=document.getElementById('endPanel'),shine=document.getElementById('shine'),intro=document.getElementById('intro'),music=document.getElementById('bgMusic');
+let index=0,timer=null,typeTimer=null,started=false;const DURATION=8500;
+function type(s){clearInterval(typeTimer);copy.textContent='';let i=0;typeTimer=setInterval(()=>{copy.textContent=s.slice(0,++i);if(i>=s.length)clearInterval(typeTimer)},18)}
+function show(n,manual=false){index=(n+slides.length)%slides.length;photos.forEach((p,i)=>p.classList.toggle('active',i===index));title.textContent=slides[index][0];type(slides[index][1]);count.textContent=`${index+1} / ${slides.length}`;progress.style.width=`${((index+1)/slides.length)*100}%`;final.style.display=index===slides.length-1?'block':'none';endPanel.style.display=index===slides.length-1?'block':'none';shine.classList.remove('go');void shine.offsetWidth;shine.classList.add('go');clearTimeout(timer);timer=setTimeout(()=>show(index+1),DURATION)}
+function next(){show(index+1,true)}function prev(){show(index-1,true)}
+document.getElementById('next').addEventListener('click',next);document.getElementById('prev').addEventListener('click',prev);
+function particles(){const box=document.getElementById('particles');const chars=['Рюд','РюД','РЎА','РЮђ','Рю┐','┬и'];setInterval(()=>{const x=document.createElement('span');x.className='particle';x.textContent=chars[Math.floor(Math.random()*chars.length)];x.style.left=Math.random()*100+'%';x.style.fontSize=10+Math.random()*18+'px';x.style.animationDuration=7+Math.random()*7+'s';box.appendChild(x);setTimeout(()=>x.remove(),15000)},900)}particles();
+function start(){if(started)return;started=true;intro.classList.add('hide');show(0);try{const p=music.play();if(p&&typeof p.catch==='function')p.catch(()=>{});}catch(e){}}
+document.getElementById('open').addEventListener('click',start);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();if(e.key==='Enter'&&!started)start()});
+})();
+</script></body></html>
